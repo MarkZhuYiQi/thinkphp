@@ -1,0 +1,35 @@
+<?php
+namespace Home\Controller;
+use Think\Controller;
+class IndexController extends Controller {
+    public function index(){
+//        $this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover{color:blue;}</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>版本 V{$Think.version}</div><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_55e75dfae343f5a1"></thinkad><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
+        $get_user=D('User');        //实例化UserModel
+//        $ret=$get_user->select();
+//        var_export($ret);
+
+//        $get_user->showName();      //使用user里面的自定义方法
+
+        $news=M('news');            //不加载模型方法，直接使用数据模型，去操作表，无法使用model中的自定义方法
+        var_export($news->select());
+
+    }
+    public function newsList()
+    {
+//        $this->display('MarkZhu/test');
+        /*
+        $this->name='zhuyiqi';      //这样可以直接在模板中用php语言获得变量。
+        $arr['age']=16;
+        $arr['sex']='male';
+        $this->assign($arr);        //同样可以直接获得变量。
+        */
+        $this->title="新闻列表";
+        $this->theme('colleague')->display('MarkZhu/newsList');
+    }
+    public function newsDetail()
+    {
+        $this->title="新闻详情";
+        $this->theme('colleague')->display('MarkZhu/newsDetail');
+    }
+}
+

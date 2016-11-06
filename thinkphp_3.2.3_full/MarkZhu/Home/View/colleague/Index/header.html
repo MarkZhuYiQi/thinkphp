@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <block name="site_title"></block>
+    <link rel="stylesheet" href="__PUBLIC__/bs/css/bootstrap.css" />
+    <script src="__PUBLIC__/bs/js/jquery.js"></script>
+    <script src="__PUBLIC__/bs/js/bootstrap.js"></script>
+</head>
+<body>
+{//按需自动加载自定义标签}
+<taglib name="Home\MarkTag\Nav,Home\MarkTag\Mark" />
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Brand</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+                {//加载导航栏,用widget方法加载}
+                {//~$nav=W('Nav/def')}
+
+                {//用自定义标签方式加载导航栏}
+                <!--<nav:load />-->
+
+                <!--用tp自带模板引擎方式加载导航栏-->
+                <!--用行为扩展方式加载导航栏-->
+                <foreach name="nav" item="navbar">
+                    <li><a href="{$navbar.nav_href}">{$navbar.nav_title}</a></li>
+                </foreach>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
