@@ -1,0 +1,529 @@
+[ 2016-11-07T23:08:35+08:00 ] ::1 /index.php?c=Index&a=index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000595s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000546s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0058s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0006s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.016316s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.017016s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000068s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000160s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015214s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015323s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000400s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000484s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000520s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000606s ]
+
+[ 2016-11-07T23:08:45+08:00 ] ::1 /index.php?c=user&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000428s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000467s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0003s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.020399s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.021018s ]
+ERR: 非法操作:login
+
+[ 2016-11-07T23:09:22+08:00 ] ::1 /index.php?c=user&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000036s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000723s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000688s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0056s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0005s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.025287s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.026215s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000086s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000278s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008430s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.008603s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000627s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000777s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000866s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001018s ]
+
+[ 2016-11-07T23:10:01+08:00 ] ::1 /index.php?c=user&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000035s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000681s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000692s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0057s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.025613s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.026540s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000101s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000255s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0005s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015101s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015258s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000631s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000775s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000852s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001003s ]
+
+[ 2016-11-07T23:11:18+08:00 ] ::1 /index.php?c=user&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000036s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000737s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000891s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0059s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.027385s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.028525s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000115s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000372s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0005s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.016890s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017053s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000656s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000850s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001019s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001179s ]
+
+[ 2016-11-07T23:11:19+08:00 ] ::1 /index.php?c=user&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000037s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000722s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000783s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0038s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0003s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.023376s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.024375s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000065s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000172s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009425s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009516s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000345s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000427s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000485s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000570s ]
+
+[ 2016-11-07T23:12:02+08:00 ] ::1 /index.php?c=user&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000040s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000783s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000873s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.026617s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.027738s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000082s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000206s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011553s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011666s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000468s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000573s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000619s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000762s ]
+
+[ 2016-11-07T23:12:03+08:00 ] ::1 /index.php?c=user&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000037s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000695s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000774s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0055s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.016545s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.017579s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000075s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000194s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011706s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011836s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000433s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000527s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000574s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000675s ]
+
+[ 2016-11-07T23:12:03+08:00 ] ::1 /index.php?c=user&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000419s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000397s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0003s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.021075s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.021604s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000063s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000160s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009415s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009501s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000374s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000453s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000477s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000560s ]
+
+[ 2016-11-07T23:14:24+08:00 ] ::1 /index.php?c=user&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000423s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000754s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0041s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.021707s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.022628s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000072s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000185s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009657s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009752s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000380s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000480s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000491s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000578s ]
+
+[ 2016-11-07T23:14:25+08:00 ] ::1 /index.php?c=user&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000040s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000778s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000806s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0034s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0003s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.024816s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.025856s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000069s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000174s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009494s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009591s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000410s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000498s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000530s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000623s ]
+
+[ 2016-11-07T23:22:11+08:00 ] ::1 /Home/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000426s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000540s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0040s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0003s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.011692s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.012377s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000060s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000157s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0005s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009979s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010079s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000534s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000629s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000639s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000725s ]
+
+[ 2016-11-07T23:23:50+08:00 ] ::1 /Home/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000045s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000878s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001041s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0046s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.016824s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.018135s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000080s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000203s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011278s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011394s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000450s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000554s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000601s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000710s ]
+
+[ 2016-11-07T23:23:54+08:00 ] ::1 /Home/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000435s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000429s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0349s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0003s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.052502s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.053074s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000082s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000182s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0008s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010100s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010217s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000740s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000844s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000640s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000750s ]
+
+[ 2016-11-07T23:24:24+08:00 ] ::1 /Home/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000449s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000483s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0045s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.012134s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.012773s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000066s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000187s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009979s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010075s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000375s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000479s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000539s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000634s ]
+
+[ 2016-11-07T23:24:26+08:00 ] ::1 /Home/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000427s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000443s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0035s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0003s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.010343s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.010939s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000069s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000183s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009807s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009904s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000401s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000490s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000517s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000609s ]
+
+[ 2016-11-07T23:24:29+08:00 ] ::1 /Home/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000433s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000433s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0283s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.045875s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.046556s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000063s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000162s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009542s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009664s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000372s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000454s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000500s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000586s ]
+
+[ 2016-11-07T23:25:18+08:00 ] ::1 /Home/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000509s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000505s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0050s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.023528s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.024206s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000084s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000211s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011418s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011533s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000524s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000665s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000630s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000741s ]
+
+[ 2016-11-07T23:25:20+08:00 ] ::1 /Home/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000426s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000420s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0319s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.039354s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.039960s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000105s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000314s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.012849s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013009s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000574s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000669s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000573s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000661s ]
+
+[ 2016-11-07T23:25:24+08:00 ] ::1 /Home/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000024s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000504s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000429s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0210s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0003s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.038167s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.038742s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000065s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000166s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.011106s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.011205s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000377s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000460s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000554s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000640s ]
+
+[ 2016-11-07T23:26:34+08:00 ] ::1 /Home/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000451s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000542s ]
+SQL: SHOW COLUMNS FROM `markzhu_nav` [ RunTime:0.0035s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0003s ]
+INFO: Run Home\Behaviors\NavBehavior [ RunTime:0.020661s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.021392s ]
+INFO: [ view_parse ] --START--
+NOTIC: [8] Use of undefined constant attr - assumed 'attr' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+NOTIC: [8] Use of undefined constant close - assumed 'close' G:\wamp\www\thinkphp\thinkphp_3.2.3_full\ThinkPHP\Library\Think\Think.class.php 第 198 行.
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000071s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000178s ]
+SQL: SELECT * FROM `markzhu_nav` WHERE (  nav_isShow = 1  ) ORDER BY nav_index  [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.010027s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.010123s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000412s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000500s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000555s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000646s ]
+

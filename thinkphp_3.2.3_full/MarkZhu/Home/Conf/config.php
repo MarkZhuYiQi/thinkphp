@@ -8,5 +8,8 @@ return array(
     'DB_PWD'                =>          '7777777y',
     'DB_PREFIX'             =>          'MarkZhu_', //数据库表前缀
     'DB_DSN'                =>          'mysql:host=127.0.0.1;dbname=tp;charset=utf8',
-
+    'URL_ROUTER_ON'         =>          true,
+    'URL_ROUTE_RULES'       =>          array(
+        'login'=>'User/login'
+    ),
 );
