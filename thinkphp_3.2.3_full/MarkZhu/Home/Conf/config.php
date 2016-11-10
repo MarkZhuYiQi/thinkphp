@@ -12,4 +12,5 @@ return array(
     'URL_ROUTE_RULES'       =>          array(
         'login'=>'User/login'
     ),
+    'LOAD_EXT_CONFIG'       =>          'c_login',     //读取自定义的配置文件必须写这么一个参数！
 );
