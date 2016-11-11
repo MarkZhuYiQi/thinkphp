@@ -39,17 +39,14 @@
                 <?php if(is_array($nav)): foreach($nav as $key=>$navbar): ?><li><a href="<?php echo ($navbar["nav_href"]); ?>"><?php echo ($navbar["nav_title"]); ?></a></li><?php endforeach; endif; ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
+                <?php if($global_user): ?>
+<li><a href=""><?php echo ($global_user); ?></a></li>
+<li><a href="?do=logout">注销</a></li>
+<?php else: ?>
+<li><a href="/Home/login">登录</a></li>
+<li><a href="#">注册</a></li>
+<?php endif; ?>
+
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -71,6 +68,7 @@
                 </label>
             </div>
             <button type="submit" class="btn btn-default">登录</button>
+            <span style="color:red"><?php echo ($errorInfo); ?></span>
         </form>
     </div>
 

@@ -41,17 +41,19 @@
             <ul class="nav navbar-nav navbar-right">
                 <?php if($global_user): ?>
 <li><a href=""><?php echo ($global_user); ?></a></li>
-<li><a href="?do=logout">注销</a></li>
+<li><a href="">注销</a></li>
 <?php else: ?>
-<li><a href="/Home/login">登录</a></li>
-<li><a href="#">注册</a></li>
+<li><a href="">登录</a></li>
+<li><a href="">注册</a></li>
 <?php endif; ?>
 
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-首页
+
+    这个页面需要登录
+
 <hr>
 
     <div id="footer">

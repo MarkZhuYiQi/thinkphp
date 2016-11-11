@@ -51,7 +51,34 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-首页
+
+    <div class="container">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <h3>
+                        用户注册
+                    </h3>
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="user_name">用户名：</label><input type="text" class="form-control" id="user_name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="user_pass">密码：</label><input type="password" class="form-control" id="user_pass" />
+                        </div>
+                        <div class="form-group">
+                            <label for="pass_confirm">密码：</label><input type="password" class="form-control" id="pass_confirm" />
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" /> 同意请打勾</label>
+                        </div>
+                        <button type="submit" class="btn btn-default">注册</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <hr>
 
     <div id="footer">

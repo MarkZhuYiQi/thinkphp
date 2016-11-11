@@ -10,7 +10,8 @@ return array(
     'DB_DSN'                =>          'mysql:host=127.0.0.1;dbname=tp;charset=utf8',
     'URL_ROUTER_ON'         =>          true,
     'URL_ROUTE_RULES'       =>          array(
-        'login'=>'User/login'
+        'login'=>'User/login',
+        'reg'=>'User/reg'
     ),
     'LOAD_EXT_CONFIG'       =>          'c_login',     //读取自定义的配置文件必须写这么一个参数！
 );

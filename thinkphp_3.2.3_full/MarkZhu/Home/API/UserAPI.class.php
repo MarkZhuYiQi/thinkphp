@@ -13,13 +13,27 @@ class UserAPI
 {
     public $actionInfo='';
 
-    public function isLogin()
+    //获取当前用户信息对象。
+    public function getUser()
     {
         $getCookie=$_COOKIE['user_log_info'];
         if(!$getCookie)return false;
         $get_user_login=unserialize($getCookie);
         if(!$get_user_login)return false;
-        if($get_user_login->user_id && $get_user_login->user_id>0)return true;
+        if($get_user_login->user_id && intval($get_user_login->user_id)>0)
+        {
+            return $get_user_login;
+        }
+        return false;
+    }
+
+    public function isLogin()
+    {
+        $u=$this->getUser();
+        if($u->user_id && intval($u->user_id)>0)
+        {
+            return true;
+        }
         return false;
     }
     public function login(){
