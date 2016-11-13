@@ -7,11 +7,75 @@
  */
 
 namespace Home\API;
-
-
+use Home\Lib\PasswordHash;
+use Think\Verify;
 class UserAPI
 {
     public $actionInfo='';
+    public function verifyCheck($code,$id='')
+    {
+        $verify=new Verify();
+        return $verify->check($code,$id);
+    }
+    public function verifyCode()
+    {
+        $verify=new Verify();
+        $verify->fontSize=30;
+        $verify->entry();
+    }
+
+    public function reg()
+    {
+        $getUserName=I('post.user_name','','/\w{3,20}$/');
+        $getPassword=I('post.user_pass','','/\w{3,20}$/');
+        if($getUserName==''||$getPassword=='')
+        {
+            $this->actionInfo='$this->assign("errorInfo","Error!userName or Password format is incorrect!");';
+        }
+        else
+        {
+            $ph=new PasswordHash(8,true);
+            $user=D('users');
+            try{
+                $user->user_name=$getUserName;
+                $user->user_pwd=$ph->HashPassword($getPassword);
+                $user->startTrans();        //开启事物
+                $user_id=$user->add();
+
+                if($user_id)
+                {
+                    $muser=M('users_meta');
+                    $muser->user_id=$user_id;
+                    $muser->meta_key='reg_date';
+                    $muser->meta_value=date('Y-m-d H:i:s');
+                    $ret=$muser->add();
+                    if($ret)
+                    {
+                        $user->commit();
+                        $this->actionInfo='header("location:/Home/login");'; //跳转到登陆页面
+                        return;
+                    }
+                    else
+                    {
+                        $user->rollback();
+                        $this->actionInfo='$this->assign("errorInfo","属性表插入失败");';
+                        return;
+                    }
+                }
+                else
+                {
+                    $this->actionInfo='$this->assign("errorInfo","用户主表插入失败");';
+                    return;
+                }
+            }catch(\Think\Exception $ex){
+//                $ex->getMessage();
+                $user->rollback();
+                $this->actionInfo='$this->assign("errorInfo","用户名被占用");';
+                return;
+            }
+        }
+    }
+
 
     //获取当前用户信息对象。
     public function getUser()

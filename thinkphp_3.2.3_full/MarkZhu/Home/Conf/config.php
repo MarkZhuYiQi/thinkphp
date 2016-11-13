@@ -14,4 +14,10 @@ return array(
         'reg'=>'User/reg'
     ),
     'LOAD_EXT_CONFIG'       =>          'c_login',     //读取自定义的配置文件必须写这么一个参数！
+
+    'useImgBg'              =>          true,
+    'useCurve'              =>          true,
+    'useNoise'              =>          true,
+    'length'                =>          5,
+
 );
