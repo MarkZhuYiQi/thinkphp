@@ -20,4 +20,6 @@ return array(
     'useNoise'              =>          true,
     'length'                =>          5,
 
+    'ENCRYPT_KEY'           =>          'MarkZhuSetCookie',  //cookie设置时使用的加密钥匙.
+    'FLAG_KEY'              =>          'CookieFlagString',     //cookie标志位
 );

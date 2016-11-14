@@ -2,42 +2,49 @@
 <block name="customer">
     <script>
         var isRight='';
+
+        function checkCode(){
+            $.ajax({
+                url:"/Home/User/verifyCodeCheck",
+                type:"POST",
+                data:{
+                    code:$('#verify').val()
+                },
+                dataType:"text",
+                success:function(data,textStatus){
+                    if(data)
+                    {
+                        isRight=true;
+                        $('#verifyDiv').addClass('has-success');
+                    }else{
+                        isRight=false;
+                        $('#verifyDiv').addClass('has-warning');
+                    }
+                }
+            });
+        }
+
         $(document).ready(function(){
             $('#verify').blur(function(){
                 $('#verifyDiv').removeClass('has-success has-warning');
-            });
-            $('#verify').blur(function(){
-                $.ajax({
-                    url:"/Home/User/verifyCodeCheck",
-                    type:"POST",
-                    data:{
-                        code:$('#verify').val()
-                    },
-                    dataType:"text",
-                    success:function(data,textStatus){
-                        if(data)
-                        {
-                            isRight=true;
-                            $('#verifyDiv').addClass('has-success');
-                        }else{
-                            isRight=false;
-                            $('#verifyDiv').addClass('has-warning');
-                        }
-                    }
-                });
+                checkCode();
             });
             $('#submit').click(function(){
-                if(isRight)
+                if(isRight=='')checkCode();
+                if(!isRight)
                 {
-                    $('form').submit();
-                }else{
                     alert('请重新填写验证码！');
+                    return false;
                 }
+            });
+            $('#code').css('cursor','pointer');
+            $('#code').click(function(){
+                this.src="/Home/user/verifyCode?t="+Math.random();
             });
         });
     </script>
     <div class="container">
-        <form role="form" method="post" id="form">
+        <form role="form" method="post" id="form" action="/Home/login">
             <div class="form-group">
                 <label>用户名：</label>
                 <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入用户名">
@@ -46,19 +53,19 @@
                 <label>密码：</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="输入密码">
             </div>
-            <div class="form-group" id="verifyDiv">
+            <div class="form-inline" id="verifyDiv">
                 <label>验证码：</label>
                 <input type="text" class="form-control" id="verify" name="verify" placeholder="请输入验证码">
             </div>
             <div  class="form-group" style="height:50px;width:200px;">
-                <img src="/Home/user/verifyCode" alt="" class="img-responsive img-thumbnail" />
+                <img src="/Home/user/verifyCode" alt="" class="img-responsive img-thumbnail" id="code"/>
             </div>
             <div class="checkbox">
                 <label>
                     <input type="checkbox" name="saveUser"> 保存一周
                 </label>
             </div>
-            <button type="button" class="btn btn-default" id="submit">登录</button>
+            <button type="submit" class="btn btn-default" id="submit">登录</button>
             <span style="color:red">{$errorInfo}</span>
         </form>
     </div>

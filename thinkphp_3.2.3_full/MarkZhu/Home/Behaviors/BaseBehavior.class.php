@@ -15,7 +15,8 @@ class BaseBehavior extends Controller
         parent::__construct();   //执行controller的构造函数，不影响功能
         //修改：这里傻了，不需要获取所有方法然后判断这个方法在里面，直接可以用method_exists判断这个方法是否存在当前类中。
 //        if(isset($_GET['do']) && in_array($_GET['do'],get_class_methods(__CLASS__)))
-        if($get_do=I('get.do') && method_exists($this,$_GET['do']))
+        $get_do=I('get.do');
+        if($get_do && method_exists($this,I('get.do')))
         {
             $this->$get_do();
         }

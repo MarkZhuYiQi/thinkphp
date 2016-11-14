@@ -35,7 +35,7 @@ class UserAPI
         else
         {
             $ph=new PasswordHash(8,true);
-            $user=D('users');
+            $user=D('user');
             try{
                 $user->user_name=$getUserName;
                 $user->user_pwd=$ph->HashPassword($getPassword);
@@ -82,9 +82,11 @@ class UserAPI
     {
         $getCookie=$_COOKIE['user_log_info'];
         if(!$getCookie)return false;
-        $get_user_login=unserialize($getCookie);
+        $get_user_login=think_decrypt($getCookie,C('ENCRYPT_KEY'));
+        $get_user_login=unserialize($get_user_login);
         if(!$get_user_login)return false;
-        if($get_user_login->user_id && intval($get_user_login->user_id)>0)
+        $get_user_login->flag=think_decrypt($get_user_login->flag,C('FLAG_KEY'));
+        if($get_user_login->user_id && intval($get_user_login->user_id)>0 && (getIP()==$get_user_login->ip) && ($get_user_login->flag=='loginFlag'))
         {
             return $get_user_login;
         }
@@ -110,13 +112,19 @@ class UserAPI
         else
         {
             $result=M('users')->where(' user_name =  "'.$getUserName.'"')->limit(1)->select();
-            if($result[0]['user_pwd']==md5($getPassword))
+            $ph=new PasswordHash(8,true);
+            $check=$ph->CheckPassword($getPassword,$result[0]['user_pwd']);
+            if($check)
             {
 //                $this->actionInfo='$this->assign("errorInfo","login success!");';
                 $user_log=new \stdClass();
                 $user_log->user_id=$result[0]['user_id'];
                 $user_log->user_name=$getUserName;
-                setcookie('user_log_info',serialize($user_log),time()+10,'/');    //cookie过期时间为1小时
+                $user_log->ip=getIP();
+                $user_log->flag=think_encrypt('loginFlag',C('FLAG_KEY'));
+                $cookieString=serialize($user_log);
+                $cookieString=think_encrypt($cookieString,C('ENCRYPT_KEY'));
+                setcookie('user_log_info',$cookieString,time()+3600,'/');    //cookie过期时间为1小时
                 if(I('get.from')!='')
                 {
                     gotoUrl(I('get.from'));
