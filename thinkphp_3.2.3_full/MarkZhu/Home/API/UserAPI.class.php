@@ -20,7 +20,10 @@ class UserAPI
     public function verifyCode()
     {
         $verify=new Verify();
-        $verify->fontSize=30;
+        $verify->fontSize = 28;
+        $verify->length   = 3;
+        $verify->useNoise = false;
+        $verify->useImgBg = false;
         $verify->entry();
     }
 

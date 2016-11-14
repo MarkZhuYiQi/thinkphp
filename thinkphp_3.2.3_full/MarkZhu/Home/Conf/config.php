@@ -15,11 +15,6 @@ return array(
     ),
     'LOAD_EXT_CONFIG'       =>          'c_login',     //读取自定义的配置文件必须写这么一个参数！
 
-    'useImgBg'              =>          true,
-    'useCurve'              =>          true,
-    'useNoise'              =>          true,
-    'length'                =>          5,
-
     'ENCRYPT_KEY'           =>          'MarkZhuSetCookie',  //cookie设置时使用的加密钥匙.
     'FLAG_KEY'              =>          'CookieFlagString',     //cookie标志位
 );
