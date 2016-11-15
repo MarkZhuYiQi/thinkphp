@@ -23,11 +23,13 @@
                 <foreach name="info_data_main" item="info" >
                     <li class="media">
                         <a class="media-left" href="#">
-                            <img src="__PUBLIC__/images/test.jpg" alt="..." style="width:80px;height:80px;">
+                            <script>document.write('<img src="'+getMeta({$info.info_id},'bimg','/Public/images/none.jpg')+'"/>');</script>
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading">{$info.info_title}</h4>
-                            <div class="well">{$info.info_des}</div>
+                            <blockquote>
+                                <p>{$info.info_des}</p>
+                            </blockquote>
                             <p>
                                 <span>点击量：<script>document.write(getMeta({$info['info_id']},'views'))</script></span><span>评论数：12</span>
                             </p>

@@ -1,0 +1,60 @@
+<extend name="colleague/Index/Base" />
+<block name="customer">
+    <script>
+        var detail_data=[
+                <foreach name="info_data_detail" item="info">
+                [{$info.info_id},'{$info.im_key}','{$info.im_value}'],
+        </foreach>
+        [-1,'','']
+        ];
+        function getMeta(info_id,im_key,defaultValue)
+        {
+            for(var i=0;i<detail_data.length;i++)
+            {
+                if(detail_data[i][0]==info_id && detail_data[i][1]==im_key)return detail_data[i][2];
+            }
+            return defaultValue?defaultValue:0;
+        }
+    </script>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-8 column">
+                <ul class="media-list">
+                    <foreach name="info_data_main" item="info" >
+                        <div class="page-header">
+                            <h3 class="text-center">{$info.info_title}</h3>
+                        </div>
+                        <li class="media">
+                            <div class="col-md-4 column">
+                                <a class="media-left" href="#">
+                                    <script>document.write('<img style="width:200px" class="img-responsive" src="'+getMeta({$info.info_id},'bimg','/Public/images/none.jpg')+'"/>');</script>
+                                </a>
+                            </div>
+                            <div class="col-md-8 column">
+                                <div class="media-body">
+
+                                    <blockquote>
+                                        <p>{$info.info_des}</p>
+                                    </blockquote>
+                                    <p>
+                                        <span>点击量：<script>document.write(getMeta({$info['info_id']},'views'))</script></span><span>评论数：12</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    </foreach>
+                </ul>
+                <div class="pagination">
+                    {$page_bar}
+                </div>
+            </div>
+            <div class="col-md-4 column">
+                {:W('info/load',array(1))}
+            </div>
+        </div>
+
+
+
+
+    </div>
+</block>

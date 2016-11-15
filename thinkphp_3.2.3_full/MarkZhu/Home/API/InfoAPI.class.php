@@ -24,12 +24,20 @@ class InfoAPI
 
     function loadData($where_main='',$where_detail='')    //加载主表数据
     {
+        if($where_main!='')
+        {
+            $where_main=$where_main.' and info_type='.$this->_info_type;
+        }
+        else
+        {
+            $where_main='info_type='.$this->_info_type;
+        }
         $info_count=M('info')->where($where_main)->count();
         $p=new \Think\Page($info_count,$this->_page_size);
         $p->setConfig('next','下一页');
         $p->setConfig('prev','上一页');
         $this->page_bar=$p->show();     //分页内容样式
-        $this->_main_data=M('info')->where('info_type='.$this->_info_type)->order('info_id desc ')
+        $this->_main_data=M('info')->order('info_id desc ')
             ->where($where_main)->limit($p->firstRow.','.$p->listRows)->select();    //主表数据
         //以下是当前页项目的id拼凑
         $info_id_set='';

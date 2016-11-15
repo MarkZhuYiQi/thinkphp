@@ -13,7 +13,18 @@ class InfoController extends Controller {
         $this->assign('info_data_main',$info->_main_data);
         $this->assign('info_data_detail',$info->_detail_data);
         $this->assign('page_bar',$info->page_bar);
-        $this->theme('colleague')->display();
+        if($get_info_type==1)
+        {
+            $this->theme('colleague')->display('index');
+        }
+        elseif($get_info_type==2)
+        {
+            $this->theme('colleague')->display('product');
+        }
+
+
+
+
     }
     /**
      * 第一种获取子查询数据的方法,不推荐

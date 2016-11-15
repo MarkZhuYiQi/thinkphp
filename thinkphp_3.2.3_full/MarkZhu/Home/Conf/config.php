@@ -17,4 +17,6 @@ return array(
 
     'ENCRYPT_KEY'           =>          'MarkZhuSetCookie',  //cookie设置时使用的加密钥匙.
     'FLAG_KEY'              =>          'CookieFlagString',     //cookie标志位
+
+
 );
