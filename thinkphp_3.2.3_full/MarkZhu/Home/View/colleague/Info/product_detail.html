@@ -2,6 +2,9 @@
 <block name="customer">
 
     <style>
+        *{
+            outline:none;
+        }
         .pcontent{
             line-height:18pt;
             padding:10px;
@@ -35,6 +38,7 @@
             font-style:normal;
             text-decoration: none;
             color:#666;
+            display:block;
 
         }
         .pmetaList li:hover{
@@ -68,6 +72,8 @@
         </li>
     </script>
     <script>
+        //第一个是主表的主键ID，第二个是子表key，第三个是子表key对应的value，第四个是子表项目对应的父ID，第五个是子表主键ID
+        //如果im_pid等于0，说明他是默认值
         var detail_data=[
                 <foreach name="info_data_detail" item="info">
                 [{$info.info_id},'{$info.im_key}','{$info.im_value}',{$info.im_pid},{$info.im_id}],
@@ -120,6 +126,7 @@
                 }
                 else
                 {
+                    //如果没有找到对应的这个父ID，返回的价格就是0，那么就使用默认值来显示
                     $('.current_price').html(getMeta({$info.info_id},'current_price'));
                 }
             });
