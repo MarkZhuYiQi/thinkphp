@@ -15,6 +15,11 @@
             }
             return defaultValue?defaultValue:0;
         }
+        $('.nav-tabs li').click(function(){
+            $('.nav-tabs li').removeClass('active');
+            $(this).addClass('active');
+            return false;
+        });
     </script>
     <div class="container">
         <div class="row clearfix">
@@ -44,9 +49,14 @@
                         </li>
                     </foreach>
                 </ul>
-                <div class="pagination">
-                    {$page_bar}
-                </div>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#">商品详情</a></li>
+                    <li role="presentation"><a href="#">商品评价</a></li>
+                </ul>
+                <p>
+                    {$info.info_content}
+                </p>
+
             </div>
             <div class="col-md-4 column">
                 {:W('info/load',array(1))}

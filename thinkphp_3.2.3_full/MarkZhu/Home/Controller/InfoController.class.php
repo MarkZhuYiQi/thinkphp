@@ -21,11 +21,22 @@ class InfoController extends Controller {
         {
             $this->theme('colleague')->display('product');
         }
-
-
-
-
     }
+
+    public function detail()
+    {
+        $info_id=I('get.pid',9,'/\d+$/');
+        if($info_id<=0)exit('没有这个商品');
+        $info=new InfoAPI(2);
+        $info->loadData(' info_id='.$info_id);
+        $this->detail_data=$info->_detail_data;
+        $this->assign('info_data_main',$info->_main_data);
+        $this->assign('info_data_detail',$info->_detail_data);
+
+
+        $this->theme('colleague')->display('product_detail');
+    }
+
     /**
      * 第一种获取子查询数据的方法,不推荐
      * 该方法是用公共方法R来调用的，R方法允许跨模块跨类调用类方法，需要2个参数，第一个是类/方法：例如Info/getDetail
