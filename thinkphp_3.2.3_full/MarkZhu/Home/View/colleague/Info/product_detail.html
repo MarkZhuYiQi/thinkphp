@@ -1,9 +1,76 @@
 <extend name="colleague/Index/Base" />
 <block name="customer">
+
+    <style>
+        .pcontent{
+            line-height:18pt;
+            padding:10px;
+        }
+        .price li{
+            border:0px;
+            background:#f5f5f5;
+            padding:0;
+        }
+        .pmeta{
+            border-top:dashed 1px #ddd;
+            border-bottom:dashed 1px #ddd;
+        }
+        .pmeta li{
+            border:0px;
+        }
+        /*.pmeta li:hover{*/
+            /*background:#f5f5f5;*/
+            /*cursor:pointer;*/
+        /*}*/
+        .pmetaList{
+            margin-bottom:16px;
+            display:inline-block;
+        }
+        .pmetaList li{
+            float:left;
+            margin-right:10px;
+            padding:6px 15px;
+        }
+        .pmetaList li a{
+            font-style:normal;
+            text-decoration: none;
+            color:#666;
+
+        }
+        .pmetaList li:hover{
+            background:#eeeeee;
+            cursor:pointer;
+        }
+        .pmetaList .pm_name{
+            border:0;
+        }
+        .pmetaList .pm_name:hover{
+            background:none;
+            cursor:default;
+
+        }
+        .pm_option{
+            border-radius: 5px;
+        }
+        .btn-class .btn{
+            width:200px;
+        }
+        .selected{
+            border-color:red;
+        }
+
+    </style>
+    <script type="text/html" id="tpl_standard">
+        <li class="list-group-item pm_option">
+            <span class="text-danger">
+                <a href="javascript:;" class="standard" im_id="{im_id}">{product_standard}</a>
+            </span>
+        </li>
+    </script>
     <script>
         var detail_data=[
                 <foreach name="info_data_detail" item="info">
-                [{$info.info_id},'{$info.im_key}','{$info.im_value}'],
+                [{$info.info_id},'{$info.im_key}','{$info.im_value}',{$info.im_pid},{$info.im_id}],
         </foreach>
         [-1,'','']
         ];
@@ -11,14 +78,51 @@
         {
             for(var i=0;i<detail_data.length;i++)
             {
-                if(detail_data[i][0]==info_id && detail_data[i][1]==im_key)return detail_data[i][2];
+                //pid即父ID必须为0才返回，pid=0时代表这是默认值，pid有值说明是用来给规格做价格联动的
+                if(detail_data[i][0]==info_id && detail_data[i][1]==im_key && parseInt(detail_data[i][3])==0)return detail_data[i][2];
             }
             return defaultValue?defaultValue:0;
         }
-        $('.nav-tabs li').click(function(){
-            $('.nav-tabs li').removeClass('active');
-            $(this).addClass('active');
-            return false;
+        function getMetaList(info_id,im_key,tpl_id){
+            var result='';
+            var tpl_content=$('#'+tpl_id).html();       //模板内容
+            for(var i=0;i<detail_data.length;i++)
+            {
+                if(detail_data[i][0]==info_id && detail_data[i][1]==im_key){
+                    result+=tpl_content.replace('{'+im_key+'}',detail_data[i][2]).replace("{im_id}",detail_data[i][4]);
+                }
+            }
+            return result;
+        }
+        function getMetaByPid(im_id,im_key){
+            for(var i=0;i<detail_data.length;i++)
+            {
+                //pid即父ID必须为0才返回，pid=0时代表这是默认值，pid有值说明是用来给规格做价格联动的
+                if(parseInt(detail_data[i][3])==im_id && detail_data[i][1]==im_key)return detail_data[i][2];
+            }
+            return 0;
+        }
+        $(document).ready(function(){
+            $('.nav-tabs li').click(function(){
+                $('.nav-tabs li').removeClass('active');
+                $(this).addClass('active');
+                return false;
+            });
+            $('.standard').click(function(){
+                $('.pmetaList li').removeClass('selected');
+                $(this).parent().parent('li').addClass('selected');
+                //点击规格切换价格
+                var standard_price;
+                standard_price=getMetaByPid($(this).attr('im_id'),'current_price');
+                if(parseFloat(standard_price)>0)
+                {
+                    $('.current_price').html(standard_price);
+                }
+                else
+                {
+                    $('.current_price').html(getMeta({$info.info_id},'current_price'));
+                }
+            });
         });
     </script>
     <div class="container">
@@ -36,24 +140,74 @@
                                 </a>
                             </div>
                             <div class="col-md-8 column">
-                                <div class="media-body">
-
-                                    <blockquote>
-                                        <p>{$info.info_des}</p>
-                                    </blockquote>
-                                    <p>
-                                        <span>点击量：<script>document.write(getMeta({$info['info_id']},'views'))</script></span><span>评论数：12</span>
-                                    </p>
+                                <ul class="well list-group price">
+                                    <li class="list-group-item">
+                                        <span class="text-muted">市场价：</span>
+                                        <span> $</span>
+                                        <span class="text-muted" style="text-decoration: line-through;">
+                                            <script>
+                                                document.write(getMeta({$info.info_id},'market_price','--'));
+                                            </script>
+                                        </span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="text-muted">优惠价：</span>
+                                        <span class="text-danger" style="font-size:30px;"> $</span>
+                                        <span class="text-danger current_price" style="font-size:30px;">
+                                            <script>
+                                                document.write(getMeta({$info.info_id},'current_price','--'));
+                                            </script>
+                                        </span>
+                                    </li>
+                                </ul>
+                                <ul class="col-md-10 col-md-offset-1 list-group list-inline text-center pmeta">
+                                    <li class="list-group-item">
+                                        <span class="text-danger">
+                                            月销量：
+                                        </span>
+                                        <span>
+                                            1000
+                                        </span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="text-danger">
+                                            人气指数：
+                                        </span>
+                                        <span>
+                                            <script>
+                                                document.write(getMeta({$info.info_id},'product_popularity','--'));
+                                            </script>
+                                        </span>
+                                    </li>
+                                </ul>
+                                <ul class="list-group list-inline text-center pmetaList">
+                                    <li class="list-group-item pm_name">
+                                        <span class="text-danger">
+                                            规格：
+                                        </span>
+                                    </li>
+                                    <script>document.write(getMetaList({$info.info_id},'product_standard','tpl_standard'))</script>
+                                </ul>
+                                <div class="text-center btn-class">
+                                    <button class="btn btn-danger btn-lg">
+                                        <span class="glyphicon glyphicon-usd"></span>立即购买
+                                    </button>
+                                    <button class="btn btn-warning btn-lg">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span>加入购物车
+                                    </button>
                                 </div>
                             </div>
                         </li>
                     </foreach>
                 </ul>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#">商品详情</a></li>
-                    <li role="presentation"><a href="#">商品评价</a></li>
+                <ul>
+
                 </ul>
-                <p>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#">商品详情</a></li>
+                    <li><a href="#">商品评价</a></li>
+                </ul>
+                <p class="pcontent">
                     {$info.info_content}
                 </p>
 
