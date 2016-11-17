@@ -80,6 +80,14 @@
         </foreach>
         [-1,'','']
         ];
+        var product_id={$info.info_id};
+        /**
+         * 根据主表ID，返回根据指定键返回的值
+         * @param info_id
+         * @param im_key
+         * @param defaultValue
+         * @returns {*}
+         */
         function getMeta(info_id,im_key,defaultValue)
         {
             for(var i=0;i<detail_data.length;i++)
@@ -95,16 +103,57 @@
             for(var i=0;i<detail_data.length;i++)
             {
                 if(detail_data[i][0]==info_id && detail_data[i][1]==im_key){
-                    result+=tpl_content.replace('{'+im_key+'}',detail_data[i][2]).replace("{im_id}",detail_data[i][4]);
+//                    result+=tpl_content.replace('{'+im_key+'}',detail_data[i][2]).replace("{im_id}",detail_data[i][4]);
+                    result+=tpl_content.replace('{product_standard}',detail_data[i][2]).replace("{im_id}",detail_data[i][4]);
                 }
             }
             return result;
         }
+        /**
+         * 根据子表中的ID和key返回值
+         * @param im_id     //子表键名
+         * @param im_key    //子表键值
+         * @returns {*}
+         */
         function getMetaByPid(im_id,im_key){
             for(var i=0;i<detail_data.length;i++)
             {
-                //pid即父ID必须为0才返回，pid=0时代表这是默认值，pid有值说明是用来给规格做价格联动的
-                if(parseInt(detail_data[i][3])==im_id && detail_data[i][1]==im_key)return detail_data[i][2];
+                //寻找他爹，也就是匹配该商品的价格，并且主键名字一致
+                if(parseInt(detail_data[i][3])==im_id && detail_data[i][1]==im_key)
+                {
+                    /* 我的幻想
+                     首先选择了  钛色 id=31
+                     根据钛色ID寻找是否有以钛色ID为im_key的项目。
+                     如果有，就需要查看关联的primary规格是否已经选择，选择了哪个id。
+                     以这个primary的id为源去搜索这个id是否存在im_value中。
+                     如果存在，那么说明主规格子规格都已经选好，根据pid找到他们的价格
+                     */
+
+                    /*
+                     点击一个规格，获取他的主键ID im_id
+                     用im_id去pid中找，找到他爹，也就是价格
+                     然后用价格的唯一主键im_id去寻找以该值为im_key的项目
+                     */
+
+                    //这个relation是使用价格主键ID去获得关系
+                    var im_relation=getMeta(product_id,detail_data[i][4],0);
+                    console.log('价格主键im_key: '+detail_data[i][4]);
+                    if(im_relation>0)
+                    {
+                        console.log('关联价格的主规格ID: '+im_relation);
+                        //判断im_id=im_relation的规格是否被选中
+                        if($(".standard[im_id="+im_relation.toString()+"]").parents('li').hasClass('selected'))
+                        {
+                            console.log('im_id='+im_relation);
+                            console.log('catch!');
+                            return detail_data[i][2];
+                        }
+                    }
+                    else
+                    {
+                        return detail_data[i][2];
+                    }
+                }
             }
             return 0;
         }
@@ -115,8 +164,18 @@
                 return false;
             });
             $('.standard').click(function(){
-                $('.pmetaList li').removeClass('selected');
-                $(this).parent().parent('li').addClass('selected');
+                //说明点击了主规格中的选项
+                if($(this).parents('ul').attr('primary')==1)
+                {
+                    //清空子规格选项
+                    $("ul[primary='0']").find('li').removeClass('selected');
+                    $("ul[primary='1']").find('li').removeClass('selected');
+                }
+                if($(this).parents('ul').attr('primary')==0)
+                {
+                    $("ul[primary='0']").find('li').removeClass('selected');
+                }
+                $(this).parents('li').addClass('selected');
                 //点击规格切换价格
                 var standard_price;
                 standard_price=getMetaByPid($(this).attr('im_id'),'current_price');
@@ -187,13 +246,21 @@
                                         </span>
                                     </li>
                                 </ul>
-                                <ul class="list-group list-inline text-center pmetaList">
+                                <ul class="list-group list-inline text-center pmetaList" primary="1">
                                     <li class="list-group-item pm_name">
                                         <span class="text-danger">
                                             规格：
                                         </span>
                                     </li>
                                     <script>document.write(getMetaList({$info.info_id},'product_standard','tpl_standard'))</script>
+                                </ul>
+                                <ul class="list-group list-inline text-center pmetaList" primary="0">
+                                    <li class="list-group-item pm_name">
+                                        <span class="text-danger">
+                                            颜色：
+                                        </span>
+                                    </li>
+                                    <script>document.write(getMetaList({$info.info_id},'product_color','tpl_standard'))</script>
                                 </ul>
                                 <div class="text-center btn-class">
                                     <button class="btn btn-danger btn-lg">
