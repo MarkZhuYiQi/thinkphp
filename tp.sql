@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 16, 2016 at 09:07 AM
+-- Generation Time: Nov 17, 2016 at 09:58 AM
 -- Server version: 5.7.15
 -- PHP Version: 7.0.11
 
@@ -109,7 +109,15 @@ INSERT INTO `markzhu_info_meta` (`im_id`, `info_id`, `im_key`, `im_value`, `im_p
 (27, 19, 'product_standard', '单手表', 0),
 (28, 19, 'product_standard', '手表+表带组合', 0),
 (29, 19, 'product_popularity', '21312', 0),
-(30, 19, 'current_price', '699', 28);
+(30, 19, 'current_price', '699', 28),
+(31, 19, 'product_color', '钛色', 0),
+(32, 19, 'product_color', '黑色', 0),
+(33, 19, 'current_price', '799', 31),
+(34, 19, '33', '28', 0),
+(38, 19, 'current_price', '699', 32),
+(39, 19, '38', '32', 0),
+(40, 19, 'current_price', '599', 31),
+(41, 19, '40', '27', 0);
 
 -- --------------------------------------------------------
 
@@ -275,7 +283,7 @@ ALTER TABLE `markzhu_info`
 -- AUTO_INCREMENT for table `markzhu_info_meta`
 --
 ALTER TABLE `markzhu_info_meta`
-  MODIFY `im_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `im_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `markzhu_info_widget`
 --

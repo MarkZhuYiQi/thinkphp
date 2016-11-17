@@ -142,6 +142,7 @@
                     {
                         console.log('关联价格的主规格ID: '+im_relation);
                         //判断im_id=im_relation的规格是否被选中
+                        console.log($(".standard[im_id="+im_relation.toString()+"]").parents('li').hasClass('selected'));
                         if($(".standard[im_id="+im_relation.toString()+"]").parents('li').hasClass('selected'))
                         {
                             console.log('im_id='+im_relation);
