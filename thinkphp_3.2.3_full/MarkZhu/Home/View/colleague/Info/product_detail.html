@@ -137,16 +137,17 @@
 
                     //这个relation是使用价格主键ID去获得关系
                     var im_relation=getMeta(product_id,detail_data[i][4],0);
-                    console.log('价格主键im_key: '+detail_data[i][4]);
+//                    console.log('价格主键im_key: '+detail_data[i][4]);
                     if(im_relation>0)
                     {
-                        console.log('关联价格的主规格ID: '+im_relation);
+//                        console.log('关联价格的主规格ID: '+im_relation);
                         //判断im_id=im_relation的规格是否被选中
-                        console.log($(".standard[im_id="+im_relation.toString()+"]").parents('li').hasClass('selected'));
+//                        console.log($(".standard[im_id="+im_relation.toString()+"]").parents('li'));
                         if($(".standard[im_id="+im_relation.toString()+"]").parents('li').hasClass('selected'))
                         {
-                            console.log('im_id='+im_relation);
-                            console.log('catch!');
+//                            console.log('im_id='+im_relation);
+//                            console.log('catch!');
+//                            console.log('----------------------------------------------------------------------------------');
                             return detail_data[i][2];
                         }
                     }
@@ -159,6 +160,7 @@
             return 0;
         }
         $(document).ready(function(){
+            var cartCount=0;
             $('.nav-tabs li').click(function(){
                 $('.nav-tabs li').removeClass('active');
                 $(this).addClass('active');
@@ -176,7 +178,7 @@
                 {
                     $("ul[primary='0']").find('li').removeClass('selected');
                 }
-                $(this).parents('li').addClass('selected');
+                $(this).closest('li').addClass('selected');
                 //点击规格切换价格
                 var standard_price;
                 standard_price=getMetaByPid($(this).attr('im_id'),'current_price');
@@ -189,6 +191,50 @@
                     //如果没有找到对应的这个父ID，返回的价格就是0，那么就使用默认值来显示
                     $('.current_price').html(getMeta({$info.info_id},'current_price'));
                 }
+            });
+            $('.addToCart').click(function(e){
+                var ex=e||event;
+                var img=$('.product-image').clone();
+                $(img).css({
+                    'position':'fixed',
+                    'width':'50px',
+                    'height':'50px',
+                    'z-index':10000,
+                    top:ex.clientY,
+                    left:ex.clientX
+                });
+                $('.addToCart').parent().append(img);
+                $(img).animate(
+                        {
+                            top:$('#cart')[0].getBoundingClientRect().top,
+                            left:$('#cart')[0].getBoundingClientRect().left,
+                        },
+                        'slow',
+                        'swing',
+                        function(){
+                            $(img).animate({
+                                opacity:0,
+                            },
+                            'nromal',
+                            'swing',
+                            function(){
+                                $(img).remove();
+                                var oldNum=$('.count').html();
+                                if(oldNum=='')
+                                {
+                                    cartCount=1;
+                                }
+                                else
+                                {
+                                    cartCount=parseInt(cartCount)+1;
+                                }
+                                $('.count').html(cartCount);
+                            }
+                            );
+
+                        }
+                );
+//                $(img).hide();
             });
         });
     </script>
@@ -203,7 +249,7 @@
                         <li class="media">
                             <div class="col-md-4 column">
                                 <a class="media-left" href="#">
-                                    <script>document.write('<img style="width:200px" class="img-responsive" src="'+getMeta({$info.info_id},'bimg','/Public/images/none.jpg')+'"/>');</script>
+                                    <script>document.write('<img style="width:200px" class="product-image img-responsive" src="'+getMeta({$info.info_id},'bimg','/Public/images/none.jpg')+'"/>');</script>
                                 </a>
                             </div>
                             <div class="col-md-8 column">
@@ -265,10 +311,10 @@
                                 </ul>
                                 <div class="text-center btn-class">
                                     <button class="btn btn-danger btn-lg">
-                                        <span class="glyphicon glyphicon-usd"></span>立即购买
+                                        <span class="glyphicon glyphicon-usd"></span> 立即购买
                                     </button>
-                                    <button class="btn btn-warning btn-lg">
-                                        <span class="glyphicon glyphicon-shopping-cart"></span>加入购物车
+                                    <button class="btn btn-warning btn-lg addToCart">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span> 加入购物车
                                     </button>
                                 </div>
                             </div>
