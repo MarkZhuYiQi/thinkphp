@@ -37,7 +37,6 @@ class InfoWidget extends Controller
                 $get_widget_data=$cache->lastNews;
             }
 
-
             //加载widget模板的方法
             $this->assign('w_title', $get_widget_conf['widget_title']);
             $this->assign('w_data', $get_widget_data);

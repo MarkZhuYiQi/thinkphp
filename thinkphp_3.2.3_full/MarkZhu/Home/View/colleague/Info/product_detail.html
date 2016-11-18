@@ -140,14 +140,14 @@
 //                    console.log('价格主键im_key: '+detail_data[i][4]);
                     if(im_relation>0)
                     {
-//                        console.log('关联价格的主规格ID: '+im_relation);
+                        console.log('关联价格的主规格ID: '+im_relation);
                         //判断im_id=im_relation的规格是否被选中
 //                        console.log($(".standard[im_id="+im_relation.toString()+"]").parents('li'));
                         if($(".standard[im_id="+im_relation.toString()+"]").parents('li').hasClass('selected'))
                         {
 //                            console.log('im_id='+im_relation);
 //                            console.log('catch!');
-//                            console.log('----------------------------------------------------------------------------------');
+                            console.log('----------------------------------------------------------------------------------');
                             return detail_data[i][2];
                         }
                     }
