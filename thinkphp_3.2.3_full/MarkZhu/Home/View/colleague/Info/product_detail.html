@@ -140,14 +140,14 @@
 //                    console.log('价格主键im_key: '+detail_data[i][4]);
                     if(im_relation>0)
                     {
-                        console.log('关联价格的主规格ID: '+im_relation);
+//                        console.log('关联价格的主规格ID: '+im_relation);
                         //判断im_id=im_relation的规格是否被选中
 //                        console.log($(".standard[im_id="+im_relation.toString()+"]").parents('li'));
                         if($(".standard[im_id="+im_relation.toString()+"]").parents('li').hasClass('selected'))
                         {
 //                            console.log('im_id='+im_relation);
 //                            console.log('catch!');
-                            console.log('----------------------------------------------------------------------------------');
+//                            console.log('----------------------------------------------------------------------------------');
                             return detail_data[i][2];
                         }
                     }
@@ -158,6 +158,50 @@
                 }
             }
             return 0;
+        }
+        function trim(str){
+            return str.replace(/^\s*|\s*$/g,'');
+        }
+        function CartAnimate(ex){
+            var img=$('.product-image').clone();
+            $(img).css({
+                'position':'fixed',
+                'width':'50px',
+                'height':'50px',
+                'z-index':10000,
+                top:ex.clientY,
+                left:ex.clientX
+            });
+            $('.addToCart').parent().append(img);
+            $(img).animate(
+                    {
+                        top:$('#cart')[0].getBoundingClientRect().top,
+                        left:$('#cart')[0].getBoundingClientRect().left,
+                    },
+                    'slow',
+                    'swing',
+                    function(){
+                        $(img).animate({
+                                    opacity:0,
+                                },
+                                'nromal',
+                                'swing',
+                                function(){
+                                    $(img).remove();
+                                    var oldNum=$('.count').html();
+                                    if(oldNum=='')
+                                    {
+                                        cartCount=1;
+                                    }
+                                    else
+                                    {
+                                        cartCount=parseInt(cartCount)+1;
+                                    }
+                                    $('.count').html(cartCount);
+                                }
+                        );
+                    }
+            );
         }
         $(document).ready(function(){
             var cartCount=0;
@@ -193,48 +237,50 @@
                 }
             });
             $('.addToCart').click(function(e){
+                var btn=$(this);
                 var ex=e||event;
-                var img=$('.product-image').clone();
-                $(img).css({
-                    'position':'fixed',
-                    'width':'50px',
-                    'height':'50px',
-                    'z-index':10000,
-                    top:ex.clientY,
-                    left:ex.clientX
+                var pmeta='';
+                var validate=true;
+                $('.pmetaList').each(function(){
+                    if($(this).find('.selected').length>0)
+                    {
+                        pmeta+=$(this).find('.selected').find('a').attr('im_id')+'_';
+                    }
+                    else
+                    {
+                        alert('请选择规格！');
+                        return false;
+                    }
                 });
-                $('.addToCart').parent().append(img);
-                $(img).animate(
-                        {
-                            top:$('#cart')[0].getBoundingClientRect().top,
-                            left:$('#cart')[0].getBoundingClientRect().left,
-                        },
-                        'slow',
-                        'swing',
-                        function(){
-                            $(img).animate({
-                                opacity:0,
+                if(pmeta!=''){
+                    $.post(
+                            '/Home/Cart/add_cart',
+                            {
+                                'pid':product_id,
+                                'pmeta':pmeta
                             },
-                            'nromal',
-                            'swing',
-                            function(){
-                                $(img).remove();
-                                var oldNum=$('.count').html();
-                                if(oldNum=='')
+                            function(result){
+                                if(trim(result)=='-1')
                                 {
-                                    cartCount=1;
+                                    self.location='/Home/login?from='+encodeURIComponent(window.location.href);
                                 }
                                 else
                                 {
-                                    cartCount=parseInt(cartCount)+1;
+                                    if(result=='ok')
+                                    {
+                                        CartAnimate(ex);
+                                    }
+                                    else
+                                    {
+                                        alert(result);
+                                    }
                                 }
-                                $('.count').html(cartCount);
                             }
-                            );
+                    );
+                }
 
-                        }
-                );
-//                $(img).hide();
+
+
             });
         });
     </script>

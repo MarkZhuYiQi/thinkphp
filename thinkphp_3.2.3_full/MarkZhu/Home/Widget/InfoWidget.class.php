@@ -14,16 +14,23 @@ class InfoWidget extends Controller
     public function load($id)
     {
         $cache=S(array(
-            'type'=>'File',
-            'prefix'=>'markZhu',
-            'expire'=>600
-        ));
+                'type'=>'Memcache',
+                'host'=>'127.0.0.1',
+                'port'=>'11211',
+//                'prefix'=>'mark',
+                'expire'=>600
+            )
+        );
 
         //id先判断
         $get_widget_conf=M('info_widget')->where(' widget_id='.$id)->limit(1)->select();
         if($get_widget_conf && count($get_widget_conf)==1)
         {
             $get_widget_conf = $get_widget_conf[0];
+            $m = M();
+            eval('$get_widget_data=$m->' . $get_widget_conf['widget_model'] . ';');
+
+
 
 
             if(!$cache->lastNews)
@@ -34,6 +41,7 @@ class InfoWidget extends Controller
             }
             else
             {
+                echo 'use memcache'.'<br />';
                 $get_widget_data=$cache->lastNews;
             }
 

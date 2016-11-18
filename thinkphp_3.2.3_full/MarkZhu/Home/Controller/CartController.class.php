@@ -8,6 +8,7 @@
 
 namespace Home\Controller;
 use Think\Controller;
+use Home\API\UserAPI;
 
 class CartController extends Controller
 {
@@ -19,8 +20,27 @@ class CartController extends Controller
             'port'=>'11211',
             'expire'=>600
         ));
-        $cart->name='mark';
-        $value=$cart->name;
-        echo 'value:'.$value;
+
+        $user_id=0;
+        $user_api=new UserAPI();
+        $get_user=$user_api->getUser();
+        if($get_user)
+        {
+            $user_id=$get_user->user_id;
+        }
+        else
+        {
+            exit('-1');
+        }
+        $pmeta=I('post.pmeta','','/(\d+_)+$/');
+        $pid=I('post.pid',0,'/\d+$/');
+        if($pid>0 && $pmeta != '')
+        {
+            exit('ok');
+        }else
+        {
+            exit('提交数据不符合规范');
+        }
+
     }
 }

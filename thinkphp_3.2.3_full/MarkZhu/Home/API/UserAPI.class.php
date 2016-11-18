@@ -80,7 +80,10 @@ class UserAPI
     }
 
 
-    //获取当前用户信息对象。
+    /**
+     * 获取当前用户信息对象。
+     * @return bool|mixed|string
+     */
     public function getUser()
     {
         $getCookie=$_COOKIE['user_log_info'];
