@@ -1,0 +1,123 @@
+<extend name="colleague/Index/Base" />
+<block name="customer">
+    <script>
+        var product_list=[];
+        var product_meta_list=[];
+        var product_cart=[];
+    </script>
+<div class="container">
+    <table class="table table-bordered">
+        <tr>
+            <td class="text-right"><button class="btn btn-danger">结算</button></td>
+        </tr>
+    </table>
+    <script type="text/html" id="list">
+        <table class="table table-striped {pid}">
+            <tbody>
+                <tr>
+                    <td><img style="height:100px" src="{bimg}" alt="" /></td>
+                    <td>
+                        <p><a href="/Home/info/detail/pid/{pid}" target="_blank">{info_title}</a></p>
+                        <p style="color:#999;text-decoration:line-through">原价：{market_price}</p>
+                    </td>
+                    <td>
+                        <p>规格：{product}</p>
+                        <p>颜色：{product_color}</p>
+                    </td>
+                    <td style="color:red">{price}</td>
+                    <td><a href="javascript:;" pid="{pid}" class="del" data-toggle="modal" data-target=".bs-confirm-del">删除</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </script>
+</div>
+    <div class="modal fade bs-confirm-del" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    确定要删除这件商品吗？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default no" data-dismiss="modal">再想想</button>
+                    <button type="button" class="btn btn-danger yes" data-dismiss="modal">去意已决</button>
+                </div>
+        </div>
+    </div>
+
+    <script src="/index.php/Home/Cart/cart_num?show"></script>
+    <script>
+        function genTpl(obj,tpl)
+        {
+            var html='';
+            for(var key in obj)
+            {
+                html=tpl.replace(new RegExp('{'+key+'}','gm'),obj[key]);
+            }
+            return html;
+        }
+        function replaceTplMeta(html,info_id)
+        {
+            for(var i=0;i<product_meta_list.length;i++)
+            {
+                if(product_meta_list[i]['info_id']==info_id)
+                {
+                    for(var key in product_meta_list[i])
+                    {
+                        html=html.replace('{'+product_meta_list[i]['im_key']+'}',product_meta_list[i]['im_value']);
+                    }
+                }
+            }
+            return html;
+        }
+        function replaceCart(html,info_id)
+        {
+            var standard='';
+            for(var key in product_cart)
+            {
+                if(info_id==key)
+                {
+                    for(var k in product_cart[key])
+                    {
+                        html=html.replace(new RegExp('{'+k+'}','gm'),product_cart[key][k]);
+                    }
+                }
+            }
+            return html;
+        }
+        $('document').ready(function()
+        {
+            if(product_list.length>0)
+            {
+                var tpl=$("#list").html();
+                var detail='';
+                for(var i=0;i<product_list.length;i++)
+                {
+                    detail=genTpl(product_list[i],tpl);
+                    detail=replaceTplMeta(detail,product_list[i]['info_id']);
+                    detail=replaceCart(detail,product_list[i]['info_id']);
+                    $('.container').prepend(detail);
+                }
+            }
+            $('.del').click(function(){
+                var delNode=$(this);
+                var pid=delNode.attr('pid');
+                $('.yes').click(function(){
+                    $.ajax({
+                        url:'/Home/Cart/del_cart/pid/'+pid,
+                        type:'get',
+                        dataType:'text',
+                        success:function(result){
+                            if(result=='1')
+                            {
+                                delNode.parents('table').remove();
+                            }else{
+                                alert('error!'+result);
+                            }
+                        }
+                    })
+                })
+            });
+        });
+
+    </script>
+</block>

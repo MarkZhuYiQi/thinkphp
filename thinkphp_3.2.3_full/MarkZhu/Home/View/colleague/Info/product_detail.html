@@ -184,20 +184,14 @@
                         $(img).animate({
                                     opacity:0,
                                 },
-                                'nromal',
+                                'normal',
                                 'swing',
                                 function(){
                                     $(img).remove();
-                                    var oldNum=$('.count').html();
-                                    if(oldNum=='')
-                                    {
-                                        cartCount=1;
-                                    }
-                                    else
-                                    {
-                                        cartCount=parseInt(cartCount)+1;
-                                    }
-                                    $('.count').html(cartCount);
+                                    var cartNum=$('#cartScript');
+                                    var cartParent=cartNum.parent();
+                                    $("#cartScript").remove();
+                                    $(cartParent).append(cartNum);
                                 }
                         );
                     }
@@ -266,7 +260,7 @@
                                 }
                                 else
                                 {
-                                    if(result=='ok')
+                                    if(result=='OK')
                                     {
                                         CartAnimate(ex);
                                     }
@@ -345,7 +339,7 @@
                                             规格：
                                         </span>
                                     </li>
-                                    <script>document.write(getMetaList({$info.info_id},'product_standard','tpl_standard'))</script>
+                                    <script>document.write(getMetaList({$info.info_id},'product','tpl_standard'))</script>
                                 </ul>
                                 <ul class="list-group list-inline text-center pmetaList" primary="0">
                                     <li class="list-group-item pm_name">

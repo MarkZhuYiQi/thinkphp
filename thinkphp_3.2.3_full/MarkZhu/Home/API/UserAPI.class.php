@@ -130,7 +130,7 @@ class UserAPI
                 $user_log->flag=think_encrypt('loginFlag',C('FLAG_KEY'));
                 $cookieString=serialize($user_log);
                 $cookieString=think_encrypt($cookieString,C('ENCRYPT_KEY'));
-                setcookie('user_log_info',$cookieString,time()+3600,'/');    //cookie过期时间为1小时
+                setcookie('user_log_info',$cookieString,time()+21600,'/');    //cookie过期时间为6小时
                 if(I('get.from')!='')
                 {
                     gotoUrl(I('get.from'));
