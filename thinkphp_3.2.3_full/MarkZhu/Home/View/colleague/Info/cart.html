@@ -8,7 +8,7 @@
 <div class="container">
     <table class="table table-bordered">
         <tr>
-            <td class="text-right"><button class="btn btn-danger">结算</button></td>
+            <td class="text-right"><button class="btn btn-danger" id="createOrder" onautocomplete="off">结算</button></td>
         </tr>
     </table>
     <script type="text/html" id="list">
@@ -115,6 +115,14 @@
                             }
                         }
                     })
+                })
+            });
+            $('#createOrder').click(function()
+            {
+                $(this).html('正在提交');
+                $(this).prop('disabled','true');
+                $.get('/Home/Order/',null,function(result){
+                    alert(result);
                 })
             });
         });

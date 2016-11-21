@@ -29,5 +29,4 @@ class UserBehavior extends BaseBehavior
 //                $this->userName=unserialize($_COOKIE['user_log_info'])->user_name;
         }
     }
-
 }
