@@ -119,9 +119,11 @@
             });
             $('#createOrder').click(function()
             {
+                var createOrder=$(this);
                 $(this).html('正在提交');
                 $(this).prop('disabled','true');
                 $.get('/Home/Order/',null,function(result){
+                    createOrder.removeAttr('disabled');
                     alert(result);
                 })
             });
