@@ -1,3 +1,82 @@
+<li class="treeview">
+    <a href="#">
+        <i class="fa fa-share"></i> <span>Multilevel</span>
+        <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+        <li>
+            <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                <li>
+                    <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+    </ul>
+</li>
+
+
+
+<script type="text/html" id="main">
+    <ul class="sidebar-menu">
+        <li class="header">主菜单</li>
+        {main}
+    </ul>
+</script>
+
+<script type="text/html" id="mainItem">
+    <li class="treeview">{mainItem}</li>
+</script>
+
+<script type="text/html" id="childMain">
+    <li>
+        <a href="{href}">
+            <i class="fa fa-dashboard"></i> <span>{nodename}</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        {child}
+    </li>
+</script>
+
+<script type="text/html" id="child">
+    <ul class="treeview-menu">{children}</ul>
+</script>
+
+<script type="text/html" id="item">
+    <li><a href="{href}"><i class="fa fa-circle-o"></i>{nodename}</a></li>
+</script>
+
+<script>
+    var sidebarDetail='';
+</script>
+<script src="/Home/Index/sidebar/"></script>
+<script>
+    $(document).ready(function(){
+        var sidebar=$('#main');
+        for(var i=0;i<sidebarDetail.length;i++)
+        {
+            for(var j in sidebarDetail[i])
+            {
+                var detail=sidebarDetail[i];
+                console.log(j);
+                if(j=='child')
+                {
+                    for(var k=0;k<detail[j].length;k++)
+                    {
+                        var detail2=detail[j];
+                    }
+                }
+            }
+        }
+    });
+</script>
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -27,10 +106,44 @@
             <li class="header">主菜单</li>
             <li class="active treeview">
                 <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>测试静态菜单</span> <i class="fa fa-angle-left pull-right"></i>
+                    <i class="fa fa-dashboard"></i> <span>商品管理</span>
+                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="/Home/Test"><i class="fa fa-circle-o"></i> 测试页面</a></li>
+                    <li><a href="/Home/Test"><i class="fa fa-circle-o"></i>添加商品</a></li>
+                    <li><a href="/Home/Test"><i class="fa fa-circle-o"></i>修改商品</a></li>
+                    <li><a href="/Home/Test"><i class="fa fa-circle-o"></i>删除商品</a></li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>商品管理</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="active"><a href="/Home/Test"><i class="fa fa-circle-o"></i>添加商品</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+
+
+        </ul>
+
+
+
+
+
+
+        <!--<ul class="sidebar-menu">
+            <li class="header">主菜单</li>
+            <li class="active treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>商品管理</span> <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active"><a href="/Home/Test"><i class="fa fa-circle-o"></i>添加商品</a></li>
+                    <li class="active"><a href="/Home/Test"><i class="fa fa-circle-o"></i>修改商品</a></li>
+                    <li class="active"><a href="/Home/Test"><i class="fa fa-circle-o"></i>删除商品</a></li>
 
                 </ul>
             </li>
@@ -168,7 +281,7 @@
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-        </ul>
+        </ul>-->
     </section>
     <!-- /.sidebar -->
 </aside>

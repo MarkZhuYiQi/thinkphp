@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : win10
+Source Server         : localhost
 Source Server Version : 50617
 Source Host           : localhost:3306
 Source Database       : tp
@@ -10,10 +10,104 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-11-21 20:04:52
+Date: 2016-11-23 17:53:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for admin_acc_act
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_acc_act`;
+CREATE TABLE `admin_acc_act` (
+  `aid` int(11) NOT NULL AUTO_INCREMENT,
+  `aname` varchar(45) DEFAULT NULL COMMENT 'action名称',
+  `cid` int(11) DEFAULT NULL COMMENT 'cid就是controller的cid，对应过去',
+  PRIMARY KEY (`aid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of admin_acc_act
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for admin_acc_ctrl
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_acc_ctrl`;
+CREATE TABLE `admin_acc_ctrl` (
+  `cid` int(11) NOT NULL AUTO_INCREMENT,
+  `cname` varchar(45) DEFAULT NULL COMMENT 'controller名称',
+  PRIMARY KEY (`cid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of admin_acc_ctrl
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for admin_roles
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_roles`;
+CREATE TABLE `admin_roles` (
+  `role_id` int(11) NOT NULL,
+  `role_name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色表，存放角色信息';
+
+-- ----------------------------
+-- Records of admin_roles
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for admin_usernode
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_usernode`;
+CREATE TABLE `admin_usernode` (
+  `node_id` int(11) NOT NULL AUTO_INCREMENT,
+  `node_name` varchar(45) NOT NULL COMMENT '菜单名称',
+  `node_pid` int(11) NOT NULL DEFAULT '0' COMMENT '该菜单的父节点',
+  `node_aid` int(11) DEFAULT NULL COMMENT '该菜单的入口id',
+  PRIMARY KEY (`node_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of admin_usernode
+-- ----------------------------
+INSERT INTO `admin_usernode` VALUES ('1', '商品管理', '0', null);
+INSERT INTO `admin_usernode` VALUES ('2', '添加商品', '1', null);
+INSERT INTO `admin_usernode` VALUES ('3', '修改商品', '1', null);
+INSERT INTO `admin_usernode` VALUES ('4', '删除商品', '1', null);
+INSERT INTO `admin_usernode` VALUES ('5', '试试递归', '2', null);
+INSERT INTO `admin_usernode` VALUES ('6', '用户管理', '0', null);
+
+-- ----------------------------
+-- Table structure for admin_users
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_users`;
+CREATE TABLE `admin_users` (
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表，存放用户信息';
+
+-- ----------------------------
+-- Records of admin_users
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for admin_user_role
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_user_role`;
+CREATE TABLE `admin_user_role` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) DEFAULT NULL,
+  `user_role` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
+
+-- ----------------------------
+-- Records of admin_user_role
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for markzhu_info
@@ -189,7 +283,7 @@ CREATE TABLE `markzhu_order_detail` (
   `product_num` int(11) DEFAULT '1' COMMENT '商品数量',
   `product_price` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`detail_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of markzhu_order_detail
@@ -207,7 +301,7 @@ CREATE TABLE `markzhu_order_main` (
   `order_state` tinyint(4) DEFAULT NULL COMMENT '订单状态',
   `order_time` datetime DEFAULT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of markzhu_order_main
