@@ -7,5 +7,5 @@
  */
 //自定义一个config.php类似文件
 return array(
-    'NEED_LOGIN'      =>      array('Temp'=>'test'),
+    'NEED_LOGIN'      =>      array('Temp'=>'test','Cart'=>'index'),
 );

@@ -77,12 +77,58 @@ class OrderController extends Controller
         {
             $order_main->commit();
             $order_detail->commit();
-
+            S($cart_key,null);
             exit($order_no);
         }else{
             $order_main->rollback();
             $order_detail->rollback();
         }
         exit();
+    }
+    function checkOrder()
+    {
+        $order_no=I('get.orderNo');
+        $order_main=M('order_main');
+        $order_detail=M('order_detail');
+        //商品相关主订单信息。
+        $main=$order_main->where(' order_no='.$order_no)->select();
+        foreach($main[0] as $key=>$value)
+        {
+            $this->$key=$value;
+        }
+
+//
+//
+//
+//        $summary=array();       //数组总计，包含商品主信息，子信息，订单主信息，子信息。
+//        $order=array();         //包含订单主信息子信息
+//        $product=array();       //包含商品主信息。
+//        $product_meta=array();  //商品子信息。
+//        foreach($main[0] as $key=>$value)
+//        {
+//            $order[$key]=$value;
+//            if($key=='order_id')
+//            {
+//                //商品子订单相关信息查询
+//                $detail=$order_detail->where('order_id='.$value)->select();
+//                $product_id='';
+//                foreach($detail as $item)
+//                {
+//                    if(is_array($item))
+//                    {
+//                        if($product_id!='')$product_id.=',';
+//                        $product_id.=$item['product_id'];
+//                        array_push($order,$item);
+//                    }
+//                }
+//            }
+//        }
+//        $summary['order']=$order;
+//        $product=M('info')->where(' info_id in ('.$product_id.')')->field('info_id,info_title')->select();
+//        $product_meta=M('info_meta')->where(' info_id in ('.$product_id.')')->select();
+//
+
+
+        $this->theme('colleague')->display('Info/checkOrder');
     }
 }

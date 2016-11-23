@@ -19,7 +19,7 @@ class CartController extends Controller
     public function cart_num()
     {
         $container_id=I('get.id','count');
-        $show=isset($_GET['show'])?true:false;      //是否显示购物车内容
+        $show=isset($_GET['show'])?true:false;      //是否显示购物车内容商品信息
         S(array(
             'type'=>'memcache',
             'host'=>'127.0.0.1',
@@ -53,7 +53,6 @@ class CartController extends Controller
                 echo "product_list=eval('".json_encode($result)."');".PHP_EOL;
                 echo "product_meta_list=eval('".json_encode($result_meta)."');".PHP_EOL;
                 echo "product_cart=eval(".$get_cart_cache.");".PHP_EOL;
-
                 exit();
             }
             else

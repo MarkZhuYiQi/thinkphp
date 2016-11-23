@@ -6,7 +6,7 @@
         var product_cart=[];
     </script>
 <div class="container">
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="checkOut">
         <tr>
             <td class="text-right"><button class="btn btn-danger" id="createOrder" onautocomplete="off">结算</button></td>
         </tr>
@@ -86,6 +86,12 @@
         }
         $('document').ready(function()
         {
+            if(product_cart.length<=0)
+            {
+                $('#checkOut').remove();
+                var emptyString='<div class="jumbotron"><p class="text-center">啊哦，您的购物车空空如也~</p></div>';
+                $('.container').append(emptyString);
+            }
             if(product_list.length>0)
             {
                 var tpl=$("#list").html();
@@ -124,7 +130,7 @@
                 $(this).prop('disabled','true');
                 $.get('/Home/Order/',null,function(result){
                     createOrder.removeAttr('disabled');
-                    alert(result);
+                    window.location.href='/Home/Order/checkOrder?orderNo='+result;
                 })
             });
         });

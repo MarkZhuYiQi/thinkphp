@@ -1,0 +1,21 @@
+<extend name="colleague/Index/Base" />
+<block name="customer">
+    <div class="container">
+        <!--<script type="text/html">-->
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Panel heading</div>
+
+                <!-- List group -->
+
+                <ul class="list-group">
+                    <li class="list-group-item">订单编号：{$order_no}</li>
+                    <li class="list-group-item">订单信息：{order_detail}</li>
+                    <li class="list-group-item">订单总额：{$order_price}</li>
+                    <li class="list-group-item">订单生成时间：{$order_time}</li>
+                    <li class="list-group-item"><button class="btn btn-danger">付款</button></li>
+                </ul>
+            </div>
+        <!--</script>-->
+    </div>
+</block>
