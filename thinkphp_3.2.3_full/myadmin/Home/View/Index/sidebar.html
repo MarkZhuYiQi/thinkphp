@@ -32,30 +32,36 @@
 
 <script>
     $(document).ready(function(){
-//        var childs='';
+        var childs='';
         var temp='';
         var res=$('#main').html();
 //        console.log(sidebarDetail);
-        for(var i=0;i<sidebarDetail.length;i++)
-        {
-            if(sidebarDetail[i]['child']!=null&&typeof sidebarDetail[i]['child'] == 'object')
-            {
-                temp=genTpl(sidebarDetail[i],$('#childMain').html());
-            }else{
-                temp=genTpl(sidebarDetail[i],$('#item').html());
-            }
-            res=res.replace('{main}',temp+'{main}');
-//            console.log(res);
-            if(typeof sidebarDetail[i]['child'] == 'object')
-            {
-                temp=genSidebar(sidebarDetail[i]['child'],'');
-                res=res.replace('{children}',temp+'{children}');
-            }
-        }
-//        console.log(res);
+        genSidebar();
+        console.log(res);
         $('.sidebar-menu').html(res);
 
-
+        function genSidebar()
+        {
+            for(var i=0;i<sidebarDetail.length;i++)
+            {
+                if(sidebarDetail[i]['child']!=null && typeof sidebarDetail[i]['child'] == 'object')
+                {
+                    //这是一个根目录节点
+                    temp=genTpl(sidebarDetail[i],$('#childMain').html());
+                }
+                else
+                {
+                    //根目录成员项目
+                    temp=genTpl(sidebarDetail[i],$('#item').html());
+                }
+                res=res.replace('{main}',temp+'{main}');
+                //此句话以上已经完成初级菜单目录。接下来是重点 递归。
+                if(typeof sidebarDetail[i]['child'] == 'object')
+                {
+                    genChildMenu(sidebarDetail[i]['child']);
+                }
+            }
+        }
         /**
          *
          * @param items     根目录的child对象
@@ -63,41 +69,25 @@
          * @param childs
          * @returns {boolean}
          */
-        function genSidebar(items,father)
+        function genChildMenu(items)
         {
-            //循环出子节点对象们
-            for(var i=0;i<items.length;i++)
+            for(var i =0;i <items.length;i++)
             {
-                var obj=items[i];
-                //如果有子节点，就需要取一份childMain作为根菜单，然后去寻找子节点
-                if(obj['child']!=null && typeof obj['child'] == 'object')
+                if(items[i]['child']==null)
                 {
-                    //取一份主节点
-                    father=genTpl(obj, $('#childMain').html());
+                    temp=genTpl(items[i],$('#item').html());
                 }
                 else
                 {
-                    //如果没有子节点，那么就直接添加到他的父节点中。
-//                    var tpl='';
-//                    tpl=genTpl(obj,$('#item').html());
-//                    father=father.replace('{children}',tpl+'{children}');
-//                    return father;
+                    temp=genTpl(items[i],$('#childMain').html());
+                }
+                res=res.replace('{children}',temp+'{children}');
+                if(typeof items[i]['child']=='object')
+                {
+                    genChildMenu(items[i]['child']);
                 }
             }
-            return father;
-        }
-        function genChildMenu(father,obj,child)
-        {
-            if(typeof obj['child'] == 'object'){
-                father=genTpl(obj,$('#childMain').html());
-            }else{
-
-            }
-
-            for(var i in obj)
-            {
-
-            }
+            res=res.replace('{children}','');
         }
 
 
