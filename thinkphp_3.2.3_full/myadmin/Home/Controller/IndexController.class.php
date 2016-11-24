@@ -4,34 +4,6 @@ use Think\Controller;
 class IndexController extends Controller {
     public $items='';       //全局存放一个数组集合
     public $menu='';
-    public $sidebar='';     //最终拼接的菜单
-    public $main='
-        <ul class="sidebar-menu">
-            <li class="header">主菜单</li>
-            {main}
-        </ul>
-    ';
-    public $mainItem='
-        <li class="treeview">{mainItem}</li>
-    ';
-    public $childMain='
-        <li>
-            <a href="{node_href}">
-                <i class="fa fa-dashboard"></i> <span>{node_name}</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            {child}
-        </li>
-    ';
-    public $child='
-        <ul class="treeview-menu">{children}</ul>
-    ';
-
-    public $item='
-        <li><a href="{node_href}"><i class="fa fa-circle-o"></i>{node_name}</a></li>
-    ';
 
     public function index(){
         $this->display();
@@ -45,11 +17,8 @@ class IndexController extends Controller {
     {
         $sidebar=M('usernode');
         $this->items=$sidebar->select();
-//        var_export($this->items);
         $this->menu=$this->_sidebarOutput();
-//        echo "sidebarDetail=".json_encode($menu).";";
-        $this->genSidebar();
-//        var_export($this->menu);
+        echo "sidebarDetail=eval('".json_encode($this->menu)."');";
         exit();
     }
 
@@ -88,7 +57,6 @@ class IndexController extends Controller {
     {
         //根据根节点的id去寻找子节点并放进value中,到这一步就有2层菜单了
         $childs=$this->_getChildMenu($value,$id);
-
         //如果2级菜单有子节点
         if(isset($childs['child']))
         {
@@ -132,96 +100,9 @@ class IndexController extends Controller {
         }
         return $tpl;
     }
-
-    public function getSideBar(&$items,$html)
-    {
-        foreach($items as $key=>&$item)
-        {
-            if(is_array($item))
-            {
-                $html.=
-                $html=$this->getSideBar($item,$html);
-
-            }
-            else
-            {
-                if($key=='html')
-                {
-                    $html.=$item;
-                }
-            }
-//                foreach($item as $k => $value)
-//                {
-//                    if ($k != 'html') {
-//                        unset($item[$k]);
-//                    }
-//                }
-//            }
-
-        }
-        return $html;
-    }
-    public function genSideBar(){
-        foreach($this->menu as &$items)
-        {
-            $this->_genChildMenu($items);
-        }
-        $html=$this->getSideBar($this->menu,'');
-        echo $html;
-
-
-    }
-    public function _genChildMenu(&$items)
-    {
-        if(key_exists('child',$items))
-        {
-            $items['html']=$this->replaceTpl($items,$this->childMain);
-            foreach($items['child'] as &$item)
-            {
-                $this->_genChildMenu($item);
-            }
-        }else{
-            $items['html']=$this->replaceTpl($items,$this->item);
-        }
-    }
 }
 
 
 
 
 ?>
-<meta charset="utf-8">
-
-<li class="treeview">
-    <a href="#">
-        <i class="fa fa-share"></i> <span>Multilevel</span>
-        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-    </a>
-    <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-        <li>
-            <a href="#"><i class="fa fa-circle-o"></i> Level One
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                <li>
-                    <a href="#"><i class="fa fa-circle-o"></i> Level Two
-                        <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-    </ul>
-</li>

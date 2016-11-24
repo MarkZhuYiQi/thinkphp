@@ -1,29 +1,3 @@
-<li class="treeview">
-    <a href="#">
-        <i class="fa fa-share"></i> <span>Multilevel</span>
-        <i class="fa fa-angle-left pull-right"></i>
-    </a>
-    <ul class="treeview-menu">
-        <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-        <li>
-            <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
-            <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                <li>
-                    <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-    </ul>
-</li>
-
-
-
 <script type="text/html" id="main">
     <ul class="sidebar-menu">
         <li class="header">主菜单</li>
@@ -32,48 +6,109 @@
 </script>
 
 <script type="text/html" id="mainItem">
-    <li class="treeview">{mainItem}</li>
+    <li class="treeview">{node_name}</li>
 </script>
 
 <script type="text/html" id="childMain">
     <li>
-        <a href="{href}">
-            <i class="fa fa-dashboard"></i> <span>{nodename}</span>
+        <a href="{node_href}">
+            <i class="fa fa-dashboard"></i>
+            <span>{node_name}</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
-        {child}
+        <ul class="treeview-menu">{children}</ul>
     </li>
 </script>
 
-<script type="text/html" id="child">
-    <ul class="treeview-menu">{children}</ul>
-</script>
-
 <script type="text/html" id="item">
-    <li><a href="{href}"><i class="fa fa-circle-o"></i>{nodename}</a></li>
+    <li><a href="{node_href}"><i class="fa fa-circle-o"></i>{node_name}</a></li>
 </script>
 
 <script>
     var sidebarDetail='';
 </script>
-<script src="/Home/Index/sidebar/"></script>
+
+<script src="/Home/Index/sidebar"></script>
+
 <script>
     $(document).ready(function(){
-        var sidebar=$('#main');
+//        var childs='';
+        var temp='';
+        var res=$('#main').html();
+//        console.log(sidebarDetail);
         for(var i=0;i<sidebarDetail.length;i++)
         {
-            for(var j in sidebarDetail[i])
+            if(sidebarDetail[i]['child']!=null&&typeof sidebarDetail[i]['child'] == 'object')
             {
-                var detail=sidebarDetail[i];
-                console.log(j);
-                if(j=='child')
+                temp=genTpl(sidebarDetail[i],$('#childMain').html());
+            }else{
+                temp=genTpl(sidebarDetail[i],$('#item').html());
+            }
+            res=res.replace('{main}',temp+'{main}');
+//            console.log(res);
+            if(typeof sidebarDetail[i]['child'] == 'object')
+            {
+                temp=genSidebar(sidebarDetail[i]['child'],'');
+                res=res.replace('{children}',temp+'{children}');
+            }
+        }
+//        console.log(res);
+        $('.sidebar-menu').html(res);
+
+
+        /**
+         *
+         * @param items     根目录的child对象
+         * @param father    这个father是空的，用于存放最后的字符串
+         * @param childs
+         * @returns {boolean}
+         */
+        function genSidebar(items,father)
+        {
+            //循环出子节点对象们
+            for(var i=0;i<items.length;i++)
+            {
+                var obj=items[i];
+                //如果有子节点，就需要取一份childMain作为根菜单，然后去寻找子节点
+                if(obj['child']!=null && typeof obj['child'] == 'object')
                 {
-                    for(var k=0;k<detail[j].length;k++)
-                    {
-                        var detail2=detail[j];
-                    }
+                    //取一份主节点
+                    father=genTpl(obj, $('#childMain').html());
+                }
+                else
+                {
+                    //如果没有子节点，那么就直接添加到他的父节点中。
+//                    var tpl='';
+//                    tpl=genTpl(obj,$('#item').html());
+//                    father=father.replace('{children}',tpl+'{children}');
+//                    return father;
                 }
             }
+            return father;
+        }
+        function genChildMenu(father,obj,child)
+        {
+            if(typeof obj['child'] == 'object'){
+                father=genTpl(obj,$('#childMain').html());
+            }else{
+
+            }
+
+            for(var i in obj)
+            {
+
+            }
+        }
+
+
+        function genTpl(obj,tpl)
+        {
+            for(var key in obj)
+            {
+                if(typeof obj[key] != 'object')
+                tpl=tpl.replace(new RegExp('{'+key+'}','gm'),obj[key]);
+            }
+            return tpl;
         }
     });
 </script>
@@ -124,7 +159,29 @@
                     </li>
                 </ul>
             </li>
-
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-share"></i> <span>Multilevel</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                    <li>
+                        <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                            <li>
+                                <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                </ul>
+            </li>
 
 
         </ul>
