@@ -25,7 +25,7 @@ class UserAPI extends Controller
         $getUserName = I('post.userName', '/\w{3,20}$/');
         $getPassword = I('post.password', '/\w{3,20}$/');
         if ($getUserName == '' || $getPassword == '') {
-            $this->actionInfo('$this->error="Error!Please input your user name and password"');
+            $this->actionInfo='$this->error="Error!Please input your user name and password";';
         } else {
             $result = M('users')->where(' user_name ="' . $getUserName.'"')->limit(1)->select();
             $check = $getPassword == $result[0]['user_pwd'] ? true : false;
@@ -45,6 +45,10 @@ class UserAPI extends Controller
                     $this->actionInfo = 'header("location:/Home/Index");';
                 }
             }
+            else
+            {
+                $this->actionInfo='$this->error="Error! user name mismatch with password!";';
+            }
         }
     }
     public function isLogin()
@@ -54,12 +58,40 @@ class UserAPI extends Controller
             $getCookie=think_decrypt($getCookie,'FLAG_KEY');
             $get_user_login=unserialize($getCookie);
             if(!$get_user_login)return false;
-            $get_user_login->flag=think_decrypt($get_user_login->flag,C)
+            $get_user_login->flag=think_decrypt($get_user_login->flag,C);
         }
         return false;
     }
+    public function getUser()
+    {
+
+    }
     public function reg()
     {
-        $this->display('User/reg');
+        $getUserName=I('post.userName','/\w{3,20}$/');
+        $getPassword=I('post.password','/\w{3,20}$/');
+        $getConfirm=I('post.passwordConfirm','/\w{3,20}$/');
+        $getRole=I('post.role','/[A-Za-z]{3,20}/');
+        if($getUserName=='' || $getPassword=='' || $getConfirm=='' || $getRole=='' || $getPassword==)
+        {
+            $this->actionInfo='$this->assign("errorInfo","Error!please fulfill the information!");';
+        }
+        else
+        {
+            $ph=new PasswordHash(8,true);
+            $user=D('users');
+            try{
+                $user->userName=$getUserName;
+                $user->userPassword=$ph->HashPassword($getPassword);
+                $user->role=
+                $user->startTrans();
+                $user->add();
+            }catch(\Think\Exception $ex)
+            {
+
+            }
+
+        }
     }
+
 }

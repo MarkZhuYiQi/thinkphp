@@ -26,5 +26,8 @@ class UserController extends Controller
         }
         $this->display('user/login');
     }
-
+    public function reg()
+    {
+        $this->display('User/reg');
+    }
 }
