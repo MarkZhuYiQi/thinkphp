@@ -108,6 +108,14 @@ class UserAPI
         }
         return false;
     }
+
+    /**
+     * 登录流程：
+     * 获得用户名和密码，正则匹配。判断用户名和密码是否符合规范。
+     * 符合规范则去数据库根据用户名取出所有信息。根据加密字符串，和传过来的密码进行比对。
+     * 如果符合用对象将相关信息包装起来，然后进行对称加密。
+     * 然后返回到登录前的那个页面，如果有from就去from页面，没有就去index。
+     */
     public function login(){
         $getUserName=I('post.userName','','/\w{3,20}$/');
         $getPassword=I('post.password','','/\w{3,20}$/');

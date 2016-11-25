@@ -18,14 +18,13 @@ class BaseBehavior extends Controller
            method_exists($this,$get_do) && $this->$get_do();
 
 
-
         }
    }
     function logout()
     {
         //注销，过期COOKIE
 
-        setcookie("userin",null,time()-3600,"/");
+        setcookie("user_log_info",null,time()-3600,"/");
         redirect('/Home/index', 2, '注销成功...');
         exit();
     }
