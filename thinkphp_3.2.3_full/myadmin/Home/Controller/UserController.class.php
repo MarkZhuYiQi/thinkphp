@@ -24,10 +24,19 @@ class UserController extends Controller
                 eval($obj->actionInfo);
             }
         }
-        $this->display('user/login');
+        $this->display('User/login');
     }
     public function reg()
     {
+        if($_POST)
+        {
+            $obj=new UserAPI();
+            $obj->reg();
+            if($obj->actionInfo)
+            {
+                eval($obj->actionInfo);
+            }
+        }
         $this->display('User/reg');
     }
 }

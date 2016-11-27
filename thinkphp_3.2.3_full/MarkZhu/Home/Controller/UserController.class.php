@@ -2,7 +2,6 @@
 namespace Home\Controller;
 use Think\Controller;
 use Home\API\UserAPI;
-use Home\Lib\PasswordHash;
 
 class UserController extends Controller {
     public function verifyCodeCheck()
