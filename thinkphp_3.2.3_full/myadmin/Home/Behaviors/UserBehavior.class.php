@@ -16,8 +16,8 @@ class UserBehavior extends BaseBehavior{
         $user=new UserAPI();
         //判断当前controller 和 action 是否在我们的配置列表里面
         $default_show=C('DEFAULT_SHOW');
-        //如果当前页面在我们的配置表中
-        if((array_key_exists(strtolower(CONTROLLER_NAME),$default_show) && in_array(strtolower(ACTION_NAME),$default_show[strtolower(CONTROLLER_NAME)])))
+        //如果当前页面的controller不在我们的配置表中，或者当前的action也不在controller下，则需要登陆后才能看到。
+        if((!array_key_exists(strtolower(CONTROLLER_NAME),$default_show) || !in_array(strtolower(ACTION_NAME),$default_show[strtolower(CONTROLLER_NAME)])))
         {
             if(!$user->isLogin())
             {

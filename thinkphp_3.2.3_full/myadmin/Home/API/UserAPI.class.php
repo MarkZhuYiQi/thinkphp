@@ -12,7 +12,7 @@ use Home\Lib\PasswordHash;
 
 class UserAPI extends Controller
 {
-    public $actionInfo='';
+    public $actionInfo='';  //需要执行的语句存在这里
     /**
      * 登录流程：
      * 获得用户名和密码，正则匹配。判断用户名和密码是否符合规范。
@@ -22,39 +22,47 @@ class UserAPI extends Controller
      */
     public function login()
     {
-        $getUserName = I('post.userName', '/\w{3,20}$/');
-        $getPassword = I('post.password', '/\w{3,20}$/');
-        if ($getUserName == '' || $getPassword == '') {
-            $this->actionInfo='$this->error="Error!Please input your user name and password";';
-        } else {
-            $result = M('users')->where(' user_name ="' . $getUserName.'"')->limit(1)->select();
-            $check = $getPassword == $result[0]['user_pwd'] ? true : false;
+        $getUserName=I('post.userName','/\w{3,20}/');
+        $getPassword=I('post.password','/\w{3,20}/');
+        if($getUserName=='' || $getPassword=='')
+        {
+            $this->actionInfo = '$this->error="Error! Please input your user name or password!";';
+        }
+        else
+        {
+            $result=M('users')->where('user_name="'.$getUserName.'"')->limit(1)->select();
+//            $check=$getPassword == $result[0]['user_pwd']?true:false;
             $ph=new PasswordHash(8,true);
-            $check=$ph->CheckPassword($getPassword,$result[0]['user_pwd']);
-            if ($check)
+            $check=$ph->CheckPassword($getPassword,$result[0]['user_password']);
+            if($check)
             {
-                $user_log = new \stdClass();
-                $user_log->user_id = $result[0]['user_id'];
-                $user_log->user_name = $result[0]['user_name'];
-                $user_log->ip = getIP();
-                $user_log->flag = think_encrypt('loginFlag', C('FLAG_KEY'));
-                $cookieString = think_encrypt(serialize($user_log),C('ENCRYPT_KEY'));
-                $flag=setcookie('user_log_info', $cookieString, time()+3600, '/');
-                if (I('get.from'))
+                $user_log=new \stdClass();
+                $user_log->user_id=$result[0]['user_id'];
+                $user_log->user_name=$result[0]['user_name'];
+                $user_log->IP=getIP();
+                $user_log->flag=think_encrypt('loginFlag',C('FLAG_KEY'));
+                $cookieString=think_encrypt(serialize($user_log),C('ENCRYPT_KEY'));
+                $flag=setcookie('user_log_info',$cookieString,time()+3600,'/');
+                //这里给cookie起名为user_log_info，可以改成全局常量，获取之。
+                if(I('get.from'))
                 {
-                    $this->actionInfo = 'header("location:' . I('get.from') . '");';
+                    $this->actionInfo='header("location:'.I('get.from').'");';
                 }
                 else
                 {
-                    $this->actionInfo = 'header("location:/Home/Index");';
+                    $this->actionInfo='header("location:Home/Index");';
                 }
             }
             else
             {
-                $this->actionInfo='$this->error="Error! user name mismatch with password!";';
+                $this->actionInfo='$this->error="Error!userName mismatch with password!";';
             }
         }
     }
+    /**
+     * @return bool|mixed
+     * 从cookie中获取加密的用户信息，使用对称解密，反序列化字符串，得到反序列化过后的字符串，然后再反序列化加密的flag，两次都通过则返回用户的信息。
+     */
     public function getUser()
     {
         if($getCookie=$_COOKIE['user_log_info'])
@@ -63,13 +71,17 @@ class UserAPI extends Controller
             $get_user_login=unserialize($getCookie);
             if(!$get_user_login)return false;
             $get_user_login->flag=think_decrypt($get_user_login->flag,C('FLAG_KEY'));
-            if($get_user_login->user_id&&intval($get_user_login->user_id)>0&&(getIP()==$get_user_login->ip) && ($get_user_login->flag=='loginFlag'))
+            if($get_user_login->user_id && intval($get_user_login->user_id) > 0 && ($get_user_login->ip==getIP()) && ($get_user_login->flag == 'loginFlag'))
             {
                 return $get_user_login;
             }
         }
         return false;
     }
+    /**
+     * @return bool
+     * 通过判断获得的user是否存在判断是否登陆
+     */
     public function isLogin()
     {
         $u=$this->getUser();
@@ -79,13 +91,17 @@ class UserAPI extends Controller
         }
         return false;
     }
+    /**
+     * 注册新用户
+     *
+     */
     public function reg()
     {
         $getUserName=I('post.userName','/\w{3,20}$/');
         $getPassword=I('post.password','/\w{3,20}$/');
         $getConfirm=I('post.passwordConfirm','/\w{3,20}$/');
         $getRole=I('post.role','/[A-Za-z]{3,20}/');
-        if($getUserName=='' || $getPassword=='' || $getConfirm=='' || $getRole=='' || $getPassword=='')
+        if($getUserName=='' || $getPassword=='' || $getConfirm=='' || $getRole=='' || $getPassword!=$getConfirm)
         {
             $this->actionInfo='$this->assign("errorInfo","Error!please fulfill the information!");';
         }
@@ -98,14 +114,15 @@ class UserAPI extends Controller
             $user_role=M('user_role');
             try{
                 $user->user_name=$getUserName;
-                $user->user_pwd=$ph->HashPassword($getPassword);
+                $user->user_password=$ph->HashPassword($getPassword);
                 $user->startTrans();
                 $user_id=$user->add();
                 if($user_id)
                 {
-                    $roleData=$roles->where(' role_name="'.strtolower($getRole).'"')->select();
+                    $roleData=$roles->where(' role_id="'.strtolower($getRole).'"')->select();
                     $user_role->user_id=$user_id;
                     $user_role->role_id=$roleData[0]['role_id'];
+                    $user_role->user_role=false;
                     $user_role_id=$user_role->add();
                     if($user_role_id)
                     {

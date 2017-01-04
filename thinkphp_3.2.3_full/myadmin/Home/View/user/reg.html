@@ -32,9 +32,9 @@
 
   <div class="register-box-body">
     <p class="login-box-msg">Register a new membership</p>
-    <p class="login-box-msg" style="color:red;">{$errorInfo}</p>
+    <p class="login-box-msg last-msg" style="color:red;">{$errorInfo}</p>
 
-    <form method="post">
+    <form method="post" id="regForm">
       <div class="form-group has-feedback">
         <input type="text" name="userName" class="form-control" placeholder="User name">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -48,12 +48,12 @@
         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
       </div>
       <div class="form-group">
-        <select class="form-control" name="role">
-          <option value="guest">游客</option>
+        <select class="form-control" name="role" id="role-select">
+          <!--<option value="guest">游客</option>
           <option value="editor">编辑</option>
           <option value="operation">运营</option>
           <option value="super">主管</option>
-          <option value="admin">管理员</option>
+          <option value="admin">管理员</option>-->
         </select>
       </div>
       <div class="row">
@@ -66,7 +66,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+          <button type="button" class="btn btn-primary btn-block btn-flat" id="postReg">Register</button>
         </div>
         <!-- /.col -->
       </div>
@@ -100,6 +100,45 @@
       increaseArea: '20%' // optional
     });
   });
+  $(document).ready(function(){
+    var roles={$roles};
+    var select = function(roles){
+      if(roles!='null')
+      {
+        var string='';
+        for(var i in roles)
+        {
+          string+='<option value="'+roles[i]['role_id']+'">'+roles[i]['role_name']+'</option>';
+        }
+        return string;
+      }
+      return false;
+    };
+    $('#role-select').html(select(roles));
+  });
+
+  $('#postReg').click(function(){
+    var postObj=$('#regForm').serializeArray();
+    var postArr=[];
+    var location = $('.last-msg');
+    for(var i in postObj)
+    {
+      var value=postObj[i]['value'].replace(/(^\s+)|\s+|(\s+$)/g,'');
+      if(value==''){
+        return false;
+      }
+      postArr[postObj[i]['name']]=postObj[i]['value'].replace(/(^\s+)|\s+|(\s+$)/g,'');
+    }
+    if(postArr['password']!=postArr['passwordConfirm'])
+    {
+      return false;
+    }
+    else
+    {
+      $('#regForm').submit();
+    }
+  });
+
 </script>
 </body>
 </html>

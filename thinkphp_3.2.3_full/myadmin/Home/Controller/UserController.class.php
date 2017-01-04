@@ -37,6 +37,7 @@ class UserController extends Controller
                 eval($obj->actionInfo);
             }
         }
+        $this->assign('roles',json_encode(M('roles')->select()));
         $this->display('User/reg');
     }
 }
