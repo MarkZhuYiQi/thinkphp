@@ -23,11 +23,11 @@ class SidebarWidget extends Controller
             'type'=>'Memcache',
             'host'=>'223.112.88.211',
             'post'=>'11211',
-            'expire'=>'3600'
+            'expire'=>'2'
         ));
         if(!$cache->sidebar)
         {
-            $sidebar=M('usernode');
+            $sidebar=M('admin_usernode');
             $this->items=$sidebar->select();
             $this->menu=$this->_sidebarOutput();
             $cache->sidebar="sidebarDetail=eval('".json_encode($this->menu)."');";

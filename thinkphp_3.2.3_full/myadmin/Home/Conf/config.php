@@ -6,7 +6,8 @@ return array(
     'DB_TYPE'   => 'mysql', // 数据库类型
     'DB_USER'   => 'red', // 用户名
     'DB_PWD'    => 'red', // 密码
-    'DB_PREFIX' => 'admin_', // 数据库表前缀
+//    'DB_PREFIX' => 'admin_', // 数据库表前缀
+    'DB_PREFIX' => '', // 数据库表前缀
     'DB_DSN'    => 'mysql:host=223.112.88.211;port=4950;dbname=tp;charset=utf8'
 ,'URL_ROUTER_ON'   => true,
     'URL_ROUTE_RULES'=>array(
