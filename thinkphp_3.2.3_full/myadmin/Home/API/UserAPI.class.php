@@ -71,7 +71,7 @@ class UserAPI extends Controller
             $get_user_login=unserialize($getCookie);
             if(!$get_user_login)return false;
             $get_user_login->flag=think_decrypt($get_user_login->flag,C('FLAG_KEY'));
-            if($get_user_login->user_id && intval($get_user_login->user_id) > 0 && ($get_user_login->ip==getIP()) && ($get_user_login->flag == 'loginFlag'))
+            if($get_user_login->user_id && intval($get_user_login->user_id) > 0 && ($get_user_login->IP==getIP()) && ($get_user_login->flag == 'loginFlag'))
             {
                 return $get_user_login;
             }

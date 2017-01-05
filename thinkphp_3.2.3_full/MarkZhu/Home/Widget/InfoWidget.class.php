@@ -15,7 +15,7 @@ class InfoWidget extends Controller
     {
         $cache=S(array(
                 'type'=>'Memcache',
-                'host'=>'127.0.0.1',
+                'host'=>'223.112.88.211',
                 'port'=>'11211',
 //                'prefix'=>'mark',
                 'expire'=>600

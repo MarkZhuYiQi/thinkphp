@@ -23,19 +23,16 @@
 <script type="text/html" id="item">
     <li><a href="{node_href}"><i class="fa fa-circle-o"></i>{node_name}</a></li>
 </script>
-
 <script>
     var sidebarDetail='';
 </script>
 
-<script src="/Home/Index/sidebar"></script>
-
 <script>
     $(document).ready(function(){
+        {:W('Sidebar/sidebar')}
         var childs='';
         var temp='';
         var res=$('#main').html();
-//        console.log(sidebarDetail);
         genSidebar();
         console.log(res);
         $('.sidebar-menu').html(res);
