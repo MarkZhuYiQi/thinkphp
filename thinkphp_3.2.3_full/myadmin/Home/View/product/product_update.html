@@ -1,16 +1,131 @@
 <extend name="index/Base" />
 <block name="customer">
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            product_add
-        </section>
+        <!-- Main content -->
         <section class="content">
-            test
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements disabled -->
+                    <div class="box box-Info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Modify Product</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <form role="form">
+                                <div class="form-group">
+                                    <button class="btn btn-danger" type="button">提交</button>
+                                    <button class="btn btn-info" type="button">撤销</button>
+                                </div>
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <label>Product Title</label>
+                                    <input type="text" class="form-control" placeholder="Enter ..." id="product_title" value="{$prod['info_title']}">
+                                </div>
+
+                                <!-- textarea -->
+                                <div class="form-group">
+                                    <label>Product description</label>
+                                    <textarea class="form-control" rows="3" placeholder="Enter ..." id="product_des">{$prod['info_des']}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="editor1" id="editor1" rows="10" cols="80">
+                                    {$prod.info_content}
+                                    </textarea>
+                                </div>
+                                <div class="container">
+                                    <div class="row clearfix">
+                                        <div class="col-md-4 column">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <input type="checkbox" />
+                                                    </span>
+                                                    <input type="text" class="form-control" placeholder="新增商品组合" value="">
+                                                </div>
+                                                <label>商品-组合</label>
+                                                <select class="form-control">
+                                                    <option>option 1</option>
+                                                    <option>option 2</option>
+                                                    <option>option 3</option>
+                                                    <option>option 4</option>
+                                                    <option>option 5</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 column">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <input type="checkbox" />
+                                                    </span>
+                                                    <input type="text" class="form-control" placeholder="新增颜色" value="">
+                                                </div>
+                                                <label>颜色</label>
+                                                <select class="form-control">
+                                                    <option>option 1</option>
+                                                    <option>option 2</option>
+                                                    <option>option 3</option>
+                                                    <option>option 4</option>
+                                                    <option>option 5</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 column">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <input type="checkbox" />
+                                                    </span>
+                                                    <input type="text" class="form-control" placeholder="新增价格" value="">
+                                                </div>
+                                                <label>最终价格</label>
+                                                <select class="form-control">
+                                                    <option>option 1</option>
+                                                    <option>option 2</option>
+                                                    <option>option 3</option>
+                                                    <option>option 4</option>
+                                                    <option>option 5</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="text-align:center">
+                                    <button class="btn btn-success" type="button">添加</button>
+                                    <button class="btn btn-default" type="button">清空</button>
+                                </div>
+                                <div class="form-group">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <span>机头+狗头</span> +
+                                            <span>钛色</span> =
+                                            <span>12999</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <span>机头+狗头</span> +
+                                            <span>钛色</span> =
+                                            <span>12999</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-danger" type="button">提交</button>
+                                    <button class="btn btn-info" type="button">撤销</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
         </section>
     </div>
+    <script src="__PUBLIC__/admin/plugins/ckeditor/ckeditor.js"></script>
     <script>
         $(document).ready(function(){
+            CKEDITOR.replace( 'editor1' );
             var path=window.location.pathname;
             var lis=$('.sidebar-menu li');
 //            console.log(lis);

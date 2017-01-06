@@ -30,7 +30,7 @@ class UserAPI extends Controller
         }
         else
         {
-            $result=M('users')->where('user_name="'.$getUserName.'"')->limit(1)->select();
+            $result=M('admin_users')->where('user_name="'.$getUserName.'"')->limit(1)->select();
 //            $check=$getPassword == $result[0]['user_pwd']?true:false;
             $ph=new PasswordHash(8,true);
             $check=$ph->CheckPassword($getPassword,$result[0]['user_password']);
