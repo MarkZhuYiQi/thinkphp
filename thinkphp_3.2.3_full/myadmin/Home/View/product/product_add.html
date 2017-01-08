@@ -11,17 +11,7 @@
     </div>
     <script>
         $(document).ready(function(){
-            var path=window.location.pathname;
-            var lis=$('.sidebar-menu li');
-//            console.log(lis);
-            lis.each(function(i,val)
-            {
-                if($(val).find('a').attr('href')==path)
-                {
-                    $($('.sidebar-menu li')[i]).addClass('active').parents('li').addClass('active');
-                    console.log($($('.sidebar-menu li')[i]).parents('li'));
-                }
-            })
+
         });
     </script>
 </block>

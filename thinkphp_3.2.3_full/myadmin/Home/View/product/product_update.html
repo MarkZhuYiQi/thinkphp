@@ -1,5 +1,10 @@
 <extend name="index/Base" />
 <block name="customer">
+    <style>
+        #priceArea{
+            transition:background-color 0.3s ease-in;
+        }
+    </style>
     <div class="content-wrapper">
         <!-- Main content -->
         <section class="content">
@@ -39,17 +44,16 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
-                                                        <input type="checkbox" />
+                                                        <input type="checkbox" id="newProductType" />
                                                     </span>
-                                                    <input type="text" class="form-control" placeholder="新增商品组合" value="">
+                                                    <input id="typeArea" type="text" class="form-control" placeholder="新增商品组合" value="">
                                                 </div>
                                                 <label>商品-组合</label>
-                                                <select class="form-control">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
-                                                    <option>option 5</option>
+                                                <select class="form-control" id="typeOption">
+                                                    <option>-</option>
+                                                    <foreach name="product" item="product_item">
+                                                        <option im_id="{$product_item.im_id}">{$product_item.im_value}</option>
+                                                    </foreach>
                                                 </select>
                                             </div>
                                         </div>
@@ -57,56 +61,43 @@
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
-                                                        <input type="checkbox" />
+                                                        <input type="checkbox" id="newProductColor"/>
                                                     </span>
-                                                    <input type="text" class="form-control" placeholder="新增颜色" value="">
+                                                    <input id="colorArea" type="text" class="form-control" placeholder="新增颜色" value="">
                                                 </div>
                                                 <label>颜色</label>
-                                                <select class="form-control">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
-                                                    <option>option 5</option>
+                                                <select class="form-control" id="colorOption">
+                                                    <option>-</option>
+                                                    <foreach name="color" item="color_item">
+                                                        <option im_id="{$color_item.im_id}">{$color_item.im_value}</option>
+                                                    </foreach>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4 column">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <input type="checkbox" />
-                                                    </span>
-                                                    <input type="text" class="form-control" placeholder="新增价格" value="">
-                                                </div>
-                                                <label>最终价格</label>
-                                                <select class="form-control">
-                                                    <option>option 1</option>
-                                                    <option>option 2</option>
-                                                    <option>option 3</option>
-                                                    <option>option 4</option>
-                                                    <option>option 5</option>
-                                                </select>
+                                            <div class="form-group has-error">
+                                                <input id="priceArea" type="text" class="form-control" placeholder="新增价格" value="">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group" style="text-align:center">
-                                    <button class="btn btn-success" type="button">添加</button>
+                                    <button class="btn btn-success" type="button" id="addNewProductType" info_id="{$prod['info_id']}">添加</button>
                                     <button class="btn btn-default" type="button">清空</button>
+                                    <p id="addError" style="color:red"></p>
                                 </div>
                                 <div class="form-group">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <span>机头+狗头</span> +
-                                            <span>钛色</span> =
-                                            <span>12999</span>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <span>机头+狗头</span> +
-                                            <span>钛色</span> =
-                                            <span>12999</span>
-                                        </li>
+                                    <ul class="list-group" id="relationList">
+                                        <foreach name="prod_size" item="prod_item">
+                                            <li class="list-group-item">
+                                                <span>{$prod_item.product_mainType}</span> +
+                                                <span>{$prod_item.product_color}</span> =
+                                                <span>{$prod_item.product_price}</span>
+                                                <div style="text-align:right" class="btn btn-danger delRelation" type="button" product_color_id="{$prod_item.product_color_id}" product_price_id="{$prod_item.product_price_id}" product_relation_id="{$prod_item.product_relation_id}" product_mainType_id="{$prod_item.product_mainType_id}">
+                                                    delete
+                                                </div>
+                                            </li>
+                                        </foreach>
                                     </ul>
                                 </div>
                                 <div class="form-group">
@@ -123,20 +114,151 @@
         </section>
     </div>
     <script src="__PUBLIC__/admin/plugins/ckeditor/ckeditor.js"></script>
+    <script type="text/html" id="relationLi">
+        <li class="list-group-item">
+            <span>{type}</span> +
+            <span>{color}</span> =
+            <span>{price}</span>
+            <div class="btn btn-danger delRelation" type="button" product_color_id="{product_color_id}" product_price_id="{product_price_id}" product_relation_id="{product_relation_id}" product_mainType_id="{product_mainType_id}">
+                delete
+            </div>
+        </li>
+    </script>
     <script>
         $(document).ready(function(){
             CKEDITOR.replace( 'editor1' );
-            var path=window.location.pathname;
-            var lis=$('.sidebar-menu li');
-//            console.log(lis);
-            lis.each(function(i,val)
-            {
-                if($(val).find('a').attr('href')==path)
-                {
-                    $($('.sidebar-menu li')[i]).addClass('active').parents('li').addClass('active');
-                    console.log($($('.sidebar-menu li')[i]).parents('li'));
-                }
-            })
+            addRelation();
+            delRelation();
         });
+
+        function delRelation(){
+            $('.delRelation').each(function(key,item){
+                $(item).click(function(){
+                    var btn=this;
+                    var msg='Are you sure delete this relation?';
+                    var pCount=0;
+                    var cCount=0;
+                    if(confirm(msg)==true){
+                        $('.delRelation').each(function(k,v){
+                             if($(btn).attr('product_mainType_id')==$(v).attr('product_mainType_id')){
+                                pCount++;
+                             }
+                             if($(btn).attr('product_color_id')==$(v).attr('product_color_id')){
+                                cCount++;
+                             }
+                        });
+                        var product_mainType_id=pCount > 1 ? -1 : $(btn).attr('product_mainType_id');
+                        var product_color_id=cCount > 1 ? -1 : $(btn).attr('product_color_id');
+                        var data={
+                                prod_main:product_mainType_id,
+                                prod_relation:$(this).attr('product_relation_id'),
+                                prod_color:product_color_id,
+                                prod_price:$(this).attr('product_price_id')
+                            };
+                        //函数执行post过程，并且在回调函数中执行callback
+                        function post(callback){
+                            $.post('/Home/product/delProductRelation',JSON.stringify(data),function(msg){
+                                if(typeof msg == "string" && msg =='1'){
+                                    callback(msg);
+                                }
+                            });
+                        }
+                        //调用上面的函数，定义callback函数，将内部回调函数返回值拿出来。
+                        post(function(data){
+                            if(data==1)
+                            {
+                                $(btn).parent().remove();
+                            }
+                        });
+
+                    }else{
+                        return false;
+                    }
+                });
+            });
+        }
+        function addRelation(){
+            $('#addNewProductType').click(function(){
+                var info_id=$(this).attr('info_id');
+                if($('#newProductType').prop('checked')){
+                    var type=$('#typeArea').val();
+                }else if($('#typeOption').val()!='-'){
+//                    var type=$('#typeOption').val();
+                    var type_im_id=$('#typeOption').find('option:selected').attr('im_id');
+                }else{
+                    $('#addError').html('请指定商品或添加新商品！');
+                    return false;
+                }
+                if($('#newProductColor').prop('checked')){
+                    var color=$('#colorArea').val();
+                }else if($('#colorOption').val()!='-'){
+//                    var color=$('#colorOption').val();
+                    var color_im_id=$('#colorOption').find('option:selected').attr('im_id');
+                }else{
+                    $('#addError').html('请指定颜色或添加新颜色!');
+                    return false;
+                }
+                if($('#priceArea').val()!=''){
+                    var price=$('#priceArea').val();
+                    console.log('price');
+                }else{
+                    $('#priceArea').css(
+                            {
+                                'background':'yellow'
+                            }
+                    );
+                    $('#addError').html('请输入价格！');
+                    return false;
+                }
+                $('#addError').html('');
+//                if(type && color && price) {
+                    var data =
+                                    [
+                                        {current_price: price},
+                                        {product: type},
+                                        {product_id: type_im_id},
+                                        {product_color: color},
+                                        {product_color_id: color_im_id},
+                                        {info_id: info_id}
+                                    ]
+                            ;
+                    data = JSON.stringify(data);
+                    function post(callback) {
+                        $.post('/Home/product/addProductRelation', data, function (res) {
+                            if(res!='0'){
+                                callback(res);
+                            }
+                        });
+                    };
+                    post(function(res){
+                        var li=$('#relationLi').html();
+                        res=JSON.parse(res);
+                        for(var i in res)
+                        {
+                            li=genTpl(i,res[i],li);
+                        }
+                        var _type=type?type:$('#typeOption').val();
+                        var _color=color?color:$('#colorOption').val();
+                        li=genTpl('price',price,li);
+                        li=genTpl('type',_type,li);
+                        li=genTpl('color',_color,li);
+                        $('#relationList').append(li);
+                        var lastDelete=$($('.delRelation').last());
+                        if(type!=undefined){
+                            $('#typeOption').append('<option im_id="'+lastDelete.attr('product_mainType_id')+'">'+type+'</option>');
+                        }
+                        if(color!=undefined){
+                            $('#colorOption').append('<option im_id="'+lastDelete.attr('product_color_id')+'">'+color+'</option>');
+                        }
+                        $($($('#newProductType').parent()).next()).attr('value','');
+                        $($($('#newProductColor').parent()).next()).attr('value','');
+                        $($($('#newPrice').parent()).next()).attr('value','');
+                    });
+//                }
+            });
+        }
+        function genTpl(key,value,tpl){
+            return tpl.replace(new RegExp('{'+key+'}','img'),value);
+        }
     </script>
 </block>

@@ -42,7 +42,7 @@ class UserAPI extends Controller
                 $user_log->IP=getIP();
                 $user_log->flag=think_encrypt('loginFlag',C('FLAG_KEY'));
                 $cookieString=think_encrypt(serialize($user_log),C('ENCRYPT_KEY'));
-                $flag=setcookie('user_log_info',$cookieString,time()+3600,'/');
+                $flag=setcookie('user_log_info',$cookieString,time()+3600*6,'/');
                 //这里给cookie起名为user_log_info，可以改成全局常量，获取之。
                 if(I('get.from'))
                 {

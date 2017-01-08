@@ -71,16 +71,6 @@
     </script>
     <script>
         $(document).ready(function(){
-            var path=window.location.pathname;
-            var lis=$('.sidebar-menu li');
-            lis.each(function(i,val)
-            {
-                if($(val).find('a').attr('href')==path)
-                {
-                    $($('.sidebar-menu li')[i]).addClass('active').parents('li').addClass('active');
-                    console.log($($('.sidebar-menu li')[i]).parents('li'));
-                }
-            });
             var btns=$('.operation button');
             btns.each(function(i,item){
                 $(item).click(function(){

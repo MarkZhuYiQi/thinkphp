@@ -96,6 +96,19 @@
             }
             return tpl;
         }
+
+        //自动抓住sidebar当前位置目标
+        var path=window.location.pathname;
+        var lis=$('.sidebar-menu li');
+        lis.each(function(i,val)
+        {
+            var str=$(val).find('a').attr('href');
+            var pattern=new RegExp(str,'mg');
+            if(pattern.test(path))
+            {
+                $($('.sidebar-menu li')[i]).addClass('active').parents('li').addClass('active');
+            }
+        });
     });
 </script>
 <aside class="main-sidebar">
