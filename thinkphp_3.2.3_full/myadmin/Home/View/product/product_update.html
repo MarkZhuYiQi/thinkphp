@@ -17,28 +17,30 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <form role="form">
+                            <form id="productForm">
                                 <div class="form-group">
-                                    <button class="btn btn-danger" type="button">提交</button>
+                                    <button class="btn btn-danger submitProduct" type="button">提交</button>
                                     <button class="btn btn-info" type="button">撤销</button>
                                 </div>
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>Product Title</label>
-                                    <input type="text" class="form-control" placeholder="Enter ..." id="product_title" value="{$prod['info_title']}">
+                                    <input name="info_title" type="text" class="form-control" placeholder="Product Title" id="product_title" value="{$prod['info_title']}">
                                 </div>
 
                                 <!-- textarea -->
                                 <div class="form-group">
                                     <label>Product description</label>
-                                    <textarea class="form-control" rows="3" placeholder="Enter ..." id="product_des">{$prod['info_des']}</textarea>
+                                    <textarea name="info_des" class="form-control" rows="3" placeholder="Enter ..." id="product_des">{$prod['info_des']}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <textarea name="editor1" id="editor1" rows="10" cols="80">
+                                    <label>Product Content</label>
+                                    <textarea name="info_content" id="editor1" rows="10" cols="80">
                                     {$prod.info_content}
                                     </textarea>
                                 </div>
                                 <div class="container">
+                                    <label>Product - Type - Price Relation</label>
                                     <div class="row clearfix">
                                         <div class="col-md-4 column">
                                             <div class="form-group">
@@ -101,7 +103,7 @@
                                     </ul>
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-danger" type="button">提交</button>
+                                    <button class="btn btn-danger submitProduct" type="button" >提交</button>
                                     <button class="btn btn-info" type="button">撤销</button>
                                 </div>
                             </form>
@@ -126,11 +128,21 @@
     </script>
     <script>
         $(document).ready(function(){
-            CKEDITOR.replace( 'editor1' );
+            var editor=CKEDITOR.replace( 'editor1' );
             addRelation();
             delRelation();
+            submitProduct(editor);
         });
+        function submitProduct(editor){
+            $('.submitProduct').each(function(i,item){
+                $(item).click(function(){
+                    var data = CKEDITOR.instances.editor1.getData();
+                    console.log(data);
+                    // The "change" event is fired whenever a change is made in the editor.
 
+                });
+            });
+        }
         function delRelation(){
             $('.delRelation').each(function(key,item){
                 $(item).click(function(){
@@ -168,6 +180,24 @@
                             if(data==1)
                             {
                                 $(btn).parent().remove();
+                            }
+                            if(product_mainType_id!=-1)
+                            {
+                                $('#typeOption option').each(function(i,item){
+                                    if($(this).attr('im_id')==product_mainType_id)
+                                    {
+                                        $(this).remove();
+                                    }
+                                });
+                            }
+                            if(product_color_id!=-1)
+                            {
+                                $('#colorOption option').each(function(i,item){
+                                    if($(this).attr('im_id')==product_color_id)
+                                    {
+                                        $(this).remove();
+                                    }
+                                });
                             }
                         });
 
