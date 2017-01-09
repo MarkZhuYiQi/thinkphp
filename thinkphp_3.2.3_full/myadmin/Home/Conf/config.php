@@ -18,4 +18,9 @@ return array(
     'ENCRYPT_KEY'           =>          'MarkZhuSetCookie',  //cookie设置时使用的加密钥匙.
     'FLAG_KEY'              =>          'CookieFlagString',     //cookie标志位
 
+
+    'MAXSIZE'           =>      10485760,
+    'UPLOAD_ROOTPATH'   =>      './Public/admin/upload',
+    'UPLOAD_SAVEPATH'   =>      '/product/',
+    'UPLOAD_EXTS'       =>      array('jpg','gif','png','jpeg'),
 );

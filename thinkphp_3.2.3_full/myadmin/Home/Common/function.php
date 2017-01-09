@@ -126,3 +126,7 @@ function getIP () //取IP函数
     }
     return $ip;
 }
+
+function genFileName($user_id){
+    return $user_id.time().substr(microtime(),2,5);
+}
