@@ -19,7 +19,7 @@
                         <div class="box-body">
                             <form id="productForm">
                                 <div class="form-group">
-                                    <button class="btn btn-danger submitProduct" type="button">提交</button>
+                                    <button class="btn btn-danger submitProduct" type="button" info_id="{$prod['info_id']}">提交</button>
                                     <button class="btn btn-info" type="button">撤销</button>
                                 </div>
                                 <!-- text input -->
@@ -103,7 +103,7 @@
                                     </ul>
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-danger submitProduct" type="button" >提交</button>
+                                    <button class="btn btn-danger submitProduct" type="button" info_id="{$prod['info_id']}">提交</button>
                                     <button class="btn btn-info" type="button">撤销</button>
                                 </div>
                             </form>
@@ -129,17 +129,64 @@
     <script>
         $(document).ready(function(){
             var editor=CKEDITOR.replace( 'editor1' );
+            addObserve(editor);
             addRelation();
             delRelation();
             submitProduct(editor);
         });
-        function submitProduct(editor){
+        var form_changed=[];
+        function addObserve(editor){
+            var product_form={
+                'product_title':$('#product_title'),
+                'product_des':$('#product_des'),
+                'product_content':editor
+            };
+//            product_form['product_title'] = $('#product_title');
+//            product_form['product_des']=$('#product_des');
+//            product_form['product_content']=editor;
+            for( var i in product_form)
+            {
+                if(i!='product_content'){
+                    product_form[i].on('input',function(e){
+//                        console.log(e.target.value);
+                        form_changed.push($(this));
+
+                    });
+                }else{
+                    product_form[i].on( 'change', function( evt ) {
+//                        console.log( evt.editor.getData() );
+                        form_changed.push($(this));
+                    });
+                }
+
+            }
+        }
+        function submitProduct(){
+            var postData={};
+
             $('.submitProduct').each(function(i,item){
                 $(item).click(function(){
                     var data = CKEDITOR.instances.editor1.getData();
-                    console.log(data);
-                    // The "change" event is fired whenever a change is made in the editor.
+                    for(var i in form_changed)
+                    {
+                        var item=form_changed[i];
+                        var name=item.attr('name');
 
+                        if(name!='editor1'){
+                            postData[name]=item.val();
+                        }else{
+                            postData['info_content']=data;
+                        }
+                    }
+                   if(!$.isEmptyObject(postData)){
+                       postData['info_id']=$(this).attr('info_id');
+                       $.post('/Home/Product/submitProduct',JSON.stringify(postData),function(msg){
+                           if(msg=='updated')
+                           {
+                                window.location.href='http://localhost:9797/Home/product/index';
+                           }
+                       });
+                   }
                 });
             });
         }

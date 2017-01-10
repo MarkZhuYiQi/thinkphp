@@ -1,7 +1,11 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
+use Home\API\UploadAPI;
+use Think\Upload;
+
 class ProductController extends Controller {
+    public $info_id;        //当前正在操作的商品id
     public function index(){
         $info=M('markzhu_info');
         $product=$info->field('info_id,info_title,info_date')->where('info_type=2')->limit(100)->select();
@@ -46,13 +50,26 @@ class ProductController extends Controller {
         $this->display('product/product_add');
     }
 
+    public function uploadImage(){
+        $upload=new UploadAPI();
+        $upload->upload();
+    }
 
+    public function submitProduct(){
+        $data=json_decode(file_get_contents('php://input'));
+        if($data){
+            $product_info=M('markzhu_info');
+            if($product_info->where('info_id='.$data->info_id)->data($data)->save()!==false){
+                echo 'updated';
+            }
+        }
+    }
 
     public function updateProduct(){
-        $info_id=I('get.info_id','0','/^\d{1,20}$/');
-        $prod=M('markzhu_info')->where('info_id='.$info_id)->select();
+        $this->info_id=I('get.info_id','0','/^\d{1,20}$/');
+        $prod=M('markzhu_info')->where('info_id='.$this->info_id)->select();
         $this->assign('prod',$prod[0]);
-        $prod_detail=M('markzhu_info_meta')->where('info_id='.$info_id)->select();
+        $prod_detail=M('markzhu_info_meta')->where('info_id='.$this->info_id)->select();
         $product=array();
         $color=array();
         $price=array();
@@ -70,11 +87,12 @@ class ProductController extends Controller {
         $this->assign('product',$product);
         $this->assign('color',$color);
         $this->assign('price',$price);
-        $prod_size=$this->_gainProductRelation($prod_detail,$info_id);
+        $prod_size=$this->_gainProductRelation($prod_detail,$this->info_id);
 
         $this->assign('prod_size',$prod_size);
         $this->display('product/product_update');
     }
+
     public function addProductRelation(){
         $data=json_decode(file_get_contents('php://input'));
 //        var_export($data);

@@ -8,6 +8,7 @@
 
 namespace Home\Controller;
 use Home\API\UserAPI;
+use Home\API\ImageAPI;
 use Think\Controller;
 
 class UploadController extends Controller
@@ -25,11 +26,10 @@ class UploadController extends Controller
             'maxSize'    =>    C('MAXSIZE'),
             'rootPath'   =>    C('UPLOAD_ROOTPATH'),
             'savePath'   =>    C('UPLOAD_SAVEPATH'),
-//            'saveName'   =>    array('genFileName',array('__FILE__')),  //调用genFileName(__FILE__)
-            'saveName'   =>    array('genFileName',$user_id),  //调用genFileName(__FILE__)
+            'saveName'   =>    array('genFileName',$user_id),  //调用genFileName(__FILE__)，保存的名字
             'exts'       =>    C('UPLOAD_EXTS'),
             'autoSub'    =>    true,
-            'subName'    =>    array('date','Ymd'),
+            'subName'    =>    array('date','Ymd'),     //子文件夹目录
         );
     }
     public function upload(){
@@ -41,9 +41,12 @@ class UploadController extends Controller
         }else {
             // 上传成功 获取上传文件信息
             $des_path = '/Public/admin/upload'.$info['savepath'] . $info['savename'];
+            $Image=new ImageAPI();
+            $Image->zoom_image($des_path,$info['savename'],720);
             //ckeditor的回调方法，包含3个参数第一个是通过上传地址通过get发送的CKEditorFuncNum，第二个是上传成功图片地址，第三个留空。
             echo "<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction('" . $_GET['CKEditorFuncNum'] . "','".$des_path."','')</script>";
         }
     }
+
 
 }
